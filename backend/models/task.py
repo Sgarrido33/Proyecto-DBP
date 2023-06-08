@@ -10,7 +10,7 @@ class Task(db.Model):
     fecha_creacion: datetime.date
     fecha_limite: datetime.date
     estado_urgencia: bool
-
+    Done: bool
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     Title = db.Column(db.String(100), nullable=False, unique=True)
