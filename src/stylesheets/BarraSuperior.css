@@ -7,6 +7,16 @@
     justify-content: center;
     background-color: green;
     box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+    border-radius: 25px;
+}
+
+.contenedor-opciones{
+    width: 1000px;
+    height: 150px;
+    margin: 10px 10px 50ps;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .contenedor-texto{
@@ -29,9 +39,20 @@
     width: auto;
 }
 
+.contenedor-logo {
+    height: 150px;
+    width: 170px;
+    padding: 40;
+    background-color: goldenrod;
+    border-radius: 25px;
+}
+
 .contenedor-opcion{
+    align-items: center;
+    width: 120px;
+    height: 50px;
     color:black;
-    border-radius: 10%;
+    border-radius: 10px;
     border-color: black;
     background-color: cadetblue;
 }

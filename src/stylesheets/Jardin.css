@@ -1,0 +1,15 @@
+.tabla-jardin {
+    width: 1170px;
+    height: 150px;
+}
+.thead {
+    background-color: green;
+    color: white;
+}
+.tbody {
+    background-color:  gray;
+    color: dimgray
+}
+button{
+    font-size: small;
+}

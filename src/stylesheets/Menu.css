@@ -2,13 +2,14 @@
     width: 259px;
     height: 905px;
     margin: 10px 10px 50ps;
-    display: flex;
+    align-items: center;
     justify-content: center;
     background-color: gray;
 
 }
 .contenedor-menu-foto{
     align-items: center;
+
 }
 .foto-perfil{
      height: auto;
@@ -17,9 +18,17 @@
 
 .contenedor-menu-user{
     justify-content: center;
+    align-items: center;
+    color:aliceblue;
+    font-weight: 200;
 }
 .contenedor-menu-opciones{
     align-items: center;
-    justify-content: center;}
+    justify-content: center;
+    color:aquamarine;
+}
+.CerrarSesion{
+    color:red;
+}
 
 

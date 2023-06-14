@@ -14,7 +14,7 @@ function Menu(props) {
                 <p>Mis plantas</p>
                 <p>mis Logros</p>
                 <p>Configuracion</p>
-                <p>Cerrar Sesion</p>
+                <p className="CerrarSesion">Cerrar Sesion</p>
             </div>
 
         </div>

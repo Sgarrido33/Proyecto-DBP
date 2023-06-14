@@ -6,30 +6,41 @@ import { useState } from 'react';
 import BarraSuperior from './componentes/BarraSuperior';
 
 function App() {
-  const [numlike, setNumLike] = useState(0);
 
-  const like = () => {
-    setNumLike(numlike + 1);
-  }  
-  
   return (
     <div className="App">
-      <BarraSuperior/>
+      <div>
+        <div className='barra-superior'>
+        <BarraSuperior/>
+      </div>
       <br></br>
       <div className='Contenido'>
       <Publicacion
         imagen={'planta1'}
-        nombre={'Planta'}
-        texto={'blablabla'}
+        username={'Planta'}
+        descrip={'blablabla'}
+        comments={'Ok'}
       />
+      <Publicacion
+        imagen={'planta1'}
+        username={'Planta'}
+        descrip={'blablabla'}
+        comments={'Esta bien'}
+      />
+      <Publicacion
+        imagen={'planta1'}
+        username={'Planta'}
+        descrip={'blablabla'}
+        comments={''}
+      />
+      </div>
       </div>
       <div className='Menu'>
         <Menu
         imagen={'perfil1'}
-        usuario={'user1234'}
+        user={'user1234'}
         />
       </div>
-
     </div>
   );
 }
