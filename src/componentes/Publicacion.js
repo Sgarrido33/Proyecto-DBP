@@ -10,6 +10,9 @@ function Publicacion (props,{setNumLike,numlike}) {
         <p className="nombre-planta">{props.nombre}</p>
         <p className="texto-planta">{props.texto}</p>
     </div>
+    <div className="contenedor-comentarios">
+        {props.comentarios}
+    </div>
     <div className="contenedor-boton">
         <button
             className="Like"
@@ -20,9 +23,7 @@ function Publicacion (props,{setNumLike,numlike}) {
             {numlike}
         </div>
     </div>
-    <div className="contenedor-comentarios">
-        {props.comentarios}
-    </div>
+    
     </div>
     
     )

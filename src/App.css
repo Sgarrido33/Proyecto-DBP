@@ -1,4 +1,13 @@
 .App{
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.Contenido{
+    align-items: left;
+}
+.Menu{
+    align-items: right;
 }

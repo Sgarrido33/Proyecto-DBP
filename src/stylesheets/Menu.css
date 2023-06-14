@@ -1,0 +1,25 @@
+.contenedor-menu{
+    width: 259px;
+    height: 905px;
+    margin: 10px 10px 50ps;
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+
+}
+.contenedor-menu-foto{
+    align-items: center;
+}
+.foto-perfil{
+     height: auto;
+    width: 100%;
+}
+
+.contenedor-menu-user{
+    justify-content: center;
+}
+.contenedor-menu-opciones{
+    align-items: center;
+    justify-content: center;}
+
+
