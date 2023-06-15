@@ -3,7 +3,7 @@ import Logro from './Logro';
 function Logros(){
     return(
         <div className="contenedor-logros">
-            <div>
+            <div className="contenedor-logros-titulo">
                 <h5>Logros recientes</h5>
             </div>
             <div className="contenedor-contenido">
@@ -15,3 +15,5 @@ function Logros(){
         </div>
     )
 }
+
+export default Logros;

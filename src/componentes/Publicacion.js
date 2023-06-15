@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import '../stylesheets/Publicacion.css'
 
 function Publicacion (props, like, numlike) {

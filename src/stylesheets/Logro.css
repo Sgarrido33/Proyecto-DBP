@@ -1,0 +1,17 @@
+.contenedor-logro{
+    height: auto;
+    width: 100px;
+    justify-content: center;
+    border-radius: 5px;
+    border-color: thistle;
+}
+.contenedor-autor{
+    height: 20%;
+    width: 100px;
+    border-radius: 5px;
+    border-color: thistle;
+}
+.img{
+    height: auto;
+    width: auto;
+}

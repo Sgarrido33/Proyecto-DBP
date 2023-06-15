@@ -14,15 +14,15 @@ function App() {
       <div>
         <div className='barra-superior'>
         <BarraSuperior/>
-      </div>
-      <br></br>
-      <div className='Contenido'>
-      </div>
+        </div>
+        <div className='Contenido'>
+          
+        </div>
       </div>
       <div className='Menu'>
         <Menu
-        imagen={'perfil1'}
-        user={'user1234'}
+        foto='incognito'
+        user='user1234'
         />
       </div>
     </div>

@@ -10,8 +10,10 @@ function Logro(props){
                 <img src={require(`../imagenes/${props.imagen}.jpg`)} alt="foto-planta"></img>
             </div>
             <div className="contenedor-star">
-
+                
             </div>
         </div>
     )
 }
+
+export default Logro;
