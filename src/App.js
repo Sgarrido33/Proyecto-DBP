@@ -11,12 +11,11 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className='izquierda'>
         <div className='barra-superior'>
         <BarraSuperior/>
         </div>
         <div className='Contenido'>
-          
         </div>
       </div>
       <div className='Menu'>

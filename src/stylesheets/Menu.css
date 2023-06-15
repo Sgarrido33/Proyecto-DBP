@@ -5,13 +5,12 @@
     align-items: center;
     justify-content: center;
     background-color: gray;
-
 }
 .contenedor-menu-foto{
     align-items: center;
 }
 .foto-perfil{
-     height: auto;
+    height: auto;
     width: 100%;
 }
 
@@ -19,7 +18,9 @@
     justify-content: center;
     align-items: center;
     color:aliceblue;
-    font-weight: 200;
+}
+.user{
+    font-size: 20px;
 }
 .contenedor-menu-opciones{
     align-items: center;
