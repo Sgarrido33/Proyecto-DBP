@@ -1,8 +1,10 @@
 import React from "react";
+import './Plantas'
 import '../stylesheets/Jardin.css'
 function Jardin() {
     return(
-        <table id='tabla-jardin'>
+        <div className="contenedor-tabla">
+            <table id='tabla-jardin'>
             <thead>
                 <tr>
                     <th> Nombre </th>
@@ -21,6 +23,8 @@ function Jardin() {
             <tbody>
             </tbody>
         </table>
+        </div>
+        
     )
 }
 

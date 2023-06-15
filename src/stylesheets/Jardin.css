@@ -1,7 +1,15 @@
+.contenedor-tabla{
+    width: 1170px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
 .tabla-jardin {
     width: 1170px;
     height: 150px;
 }
+
 .thead {
     background-color: green;
     color: white;

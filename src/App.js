@@ -1,9 +1,11 @@
 
 import './App.css';
-import Publicacion from './componentes/Publicacion';
+import Publicaciones from './componentes/Publicaciones';
 import Menu from './componentes/Menu';
-import { useState } from 'react';
+import Jardin from './componentes/Jardin';
 import BarraSuperior from './componentes/BarraSuperior';
+import { useState } from 'react';
+
 
 function App() {
 
@@ -15,24 +17,6 @@ function App() {
       </div>
       <br></br>
       <div className='Contenido'>
-      <Publicacion
-        imagen={'planta1'}
-        username={'Planta'}
-        descrip={'blablabla'}
-        comments={'Ok'}
-      />
-      <Publicacion
-        imagen={'planta1'}
-        username={'Planta'}
-        descrip={'blablabla'}
-        comments={'Esta bien'}
-      />
-      <Publicacion
-        imagen={'planta1'}
-        username={'Planta'}
-        descrip={'blablabla'}
-        comments={''}
-      />
       </div>
       </div>
       <div className='Menu'>

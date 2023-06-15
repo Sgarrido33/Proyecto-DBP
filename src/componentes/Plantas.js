@@ -2,7 +2,7 @@
 function fetchPlants(){
     fetch(`/plantas`)
     .then(response => response.json())
-    .then(plantas => {
+    .then(plant => {
         const plantTable = document.getElementById('tabla-jardin');
         const tbody = plantTable.getElementsByTagName('tbody')[0];
         tbody.innerHTML = '';
@@ -14,8 +14,8 @@ function fetchPlants(){
             <td> ${plant.especie} <td>
             <td> ${plant.edad_inicial} <td>
             <td> 
-            <button type = "button" onclick=editPlayer(${plant.id})>edit</button>
-            <button type = "button" onclick=deletePlayer(${plant.id})>delete</button> <td>
+            <button type = "button" onclick=editPlant(${plant.id})>edit</button>
+            <button type = "button" onclick=deletePlant(${plant.id})>delete</button> <td>
             `;
             tbody.appendChild(row);
         });
@@ -37,7 +37,7 @@ function editPlant(id){
     }).then(response =>response.text())
     .then(text => {
         if(text==="SUCCESS"){
-            fetchPlayers();
+            fetchPlants();
         }
         else{
             alert("Error")
@@ -51,7 +51,7 @@ function deletePlant(id){
     }).then(response =>response.text())
     .then(text => {
         if(text==="SUCCESS"){
-            fetchPlayers();
+            fetchPlants();
         }
         else{
             alert("Error")

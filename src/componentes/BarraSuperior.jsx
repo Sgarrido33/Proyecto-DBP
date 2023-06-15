@@ -1,7 +1,9 @@
 import React from "react";
 import '../stylesheets/BarraSuperior.css'
 //perfil visible
+
 function BarraSuperior (props){
+    
     return(
         <div className="contenedor-barra">
             <div className="contenedor-logo">
@@ -12,18 +14,14 @@ function BarraSuperior (props){
                  <p className="NomApp">PlantPals</p>
             </div>
             <div className="contenedor-opciones">
-                <div className="contenedor-opcion">
-                    <p><a href="/Jardin.js">Mi Jardin</a></p>
-                </div>
-                <div className="contenedor-opcion">
-                    <p><a href="/Logros.js"></a>Logros</p>
-                </div>
-                <div className="contenedor-opcion">
-                    <p><a href="/Publicaciones.js"></a>Publicaciones</p>
-                </div>
+                <button onclick="window.location.href='/Jardin.js'">Mi Jardin</button>
+                <button onClick="window.location.href='/Logros.js'">Logros</button>
+                <button onClick="window.location.href='/Publicaciones.js'">Publicaciones</button>
             </div>
         </div>
+        
     )
 }
+
 
 export default BarraSuperior;

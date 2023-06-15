@@ -1,7 +1,7 @@
 .App{
   display: flex;
   flex-wrap: wrap;
-  align-items:center;
+  align-items:first baseline;
   justify-content: center;
   text-align: center;
 }
