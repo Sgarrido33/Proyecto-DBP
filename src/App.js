@@ -1,30 +1,18 @@
-
-import './App.css';
-import Publicaciones from './componentes/Publicaciones';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RegisLogin from './componentes/RegisLogin';
 import Menu from './componentes/Menu';
-import Jardin from './componentes/Jardin';
-import BarraSuperior from './componentes/BarraSuperior';
-import { useState } from 'react';
-
 
 function App() {
-
   return (
-    <div className="App">
-      <div className='izquierda'>
-        <div className='barra-superior'>
-        <BarraSuperior/>
-        </div>
-        <div className='Contenido'>
-        </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/*" element={<RegisLogin />} />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
       </div>
-      <div className='Menu'>
-        <Menu
-        foto='incognito'
-        user='user1234'
-        />
-      </div>
-    </div>
+    </Router>
   );
 }
 
