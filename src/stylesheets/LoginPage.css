@@ -1,0 +1,8 @@
+.contenedor{
+    width: 500px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(59, 124, 65);
+    border-radius: 20px;
+    box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+}

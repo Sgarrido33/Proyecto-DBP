@@ -1,13 +1,13 @@
 import React from "react";
 import '../stylesheets/BarraSuperior.css'
+import Logo from "./Logo";
 //perfil visible
 
 function BarraSuperior (props){
-    
     return(
         <div className="contenedor-barra">
             <div className="contenedor-logo">
-                <img className="logo" src={require(`../imagenes/PlantPals_Logo_v1.png`)} alt="fotoperfil"/>
+                <Logo/>
             </div>
             
             <div className="contenedor-texto">

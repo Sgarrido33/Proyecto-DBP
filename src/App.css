@@ -8,14 +8,13 @@
 .izquierda{
   min-width: 1173px;
   max-width:1175px;
-  min-height: 905px;
+  max-height: 905px;
 }
 .Contenido{
     width:1000px;
     height: auto;
-    
     justify-content: center;
-    align-items: left;
+    align-items: center;
 }
 .Menu{
     justify-content: right;

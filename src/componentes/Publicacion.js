@@ -1,31 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import BotonLike from './BotonLike'
 import '../stylesheets/Publicacion.css'
+import Comentarios from './Comentarios';
 
-function Publicacion (props, like, numlike) {
+function Publicacion (props) {
+    const { datos }=props;
+    const counter = <BotonLike/>;
+
     return(
     <div className="contenedor-publicacion">
+        
         <img className="imagen-planta" 
-    src={require(`../imagenes/${props.imagen}.jpg`)}
-    alt="planta"></img>
-    <div className="contenedor-texto-planta">
-        <p className="nombre-planta">{props.username}</p>
-        <p className="texto-planta">{props.descrip}</p>
-    </div>
-    <div className="contenedor-comentarios">
-        <p>Comentarios:</p>
-        {props.comments}
-    </div>
-    <div className="contenedor-boton">
-        <button
-            className="Like"
-            onClick={like}>
-                Like
-        </button>
-        <div className='contador'>
-            {numlike}
+        src={require(`../imagenes/${datos.imagen}.jpg`)}
+        alt="planta"></img>
+        <div className="contenedor-texto-planta">
+            {datos.map((publicacion) => (
+            <p key={publicacion.id}>
+                {publicacion.username}
+                {publicacion.descript}
+            </p>
+            ))}
         </div>
-    </div>
-    
+        <div className="contenedor-comentarios">
+            {datos.map((publicacion) => (
+            <p key={publicacion.id}>
+                Comentarios: 
+                {publicacion.comentarios}
+                <Comentarios/>
+            </p>
+            ))}
+        </div>
+        <div className="contenedor-boton">
+            {counter}
+        </div>
     </div>
     
     )
