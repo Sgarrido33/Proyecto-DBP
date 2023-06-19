@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'my_secret_key'
 
 db = SQLAlchemy(app)
-
+CORS(app)
  
 class Usuario(UserMixin, db.Model):
     __tablename__ = 'Usuario'

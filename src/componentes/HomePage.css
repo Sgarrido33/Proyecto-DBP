@@ -1,0 +1,52 @@
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../imagenes/BG.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+
+.home-container {
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.home-content {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.home-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.home-description {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.home-links {
+  margin-top: 20px;
+}
+
+.home-links p {
+  margin-bottom: 5px;
+}
+
+.home-links a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.home-links a:hover {
+  text-decoration: underline;
+}
