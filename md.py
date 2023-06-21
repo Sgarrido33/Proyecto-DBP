@@ -166,6 +166,24 @@ def usuario(username):
         db.session.commit()
         return jsonify({'message': 'Usuario eliminado'})
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data['email']
+    password = data['password']
+    if not email or not password:
+        return jsonify({'message': 'Email y contraseña son necesarios'})
+    
+    usuario = Usuario.query.filter_by(email=email).first()
+    
+    if not usuario or not usuario.check_password(password):
+        return jsonify({'message': 'Usuario y contraseña no validos'})
+    
+    usuario_data={
+        'username': usuario.username,
+        'email': usuario.email
+    }
+    return jsonify(usuario_data)
 
 
 @app.route('/publicaciones', methods=['GET', 'POST'])

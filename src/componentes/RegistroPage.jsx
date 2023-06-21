@@ -8,22 +8,42 @@ function RegistroPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (!username || !email || !password) {
+      setMessage('Por favor, completa todos los campos');
+      return;
+    }
+
     try {
-      // Lógica para enviar los datos de registro al backend usando axios o cualquier otra librería de tu elección
-      const response = await axios.post('/usuarios', {
+      const emailExistsResponse = await axios.get(`http://127.0.0.1:5000/usuarios?email=${email}`);
+      if (emailExistsResponse.data.exists) {
+        setMessage('El correo electrónico ya ha sido registrado');
+        return;
+      }
+
+      const registerResponse = await axios.post('http://127.0.0.1:5000/usuarios', {
         username,
         email,
         password
       });
   
-      // Aquí puedes manejar la respuesta del servidor si es necesario
-  
-      console.log('Registro exitoso:', response.data);
+      if (registerResponse.data.error) {
+        if (registerResponse.data.error === 'Email already exists') {
+          setMessage('El correo electrónico ya ha sido registrado');
+        } else {
+          setMessage('Error durante el registro');
+        }
+      } else {
+        setMessage('Registro exitoso');
+        console.log('Registro exitoso:', registerResponse.data);
+        window.location.href = '/login';
+      }
     } catch (error) {
-      // Aquí puedes manejar el error en caso de que ocurra
-  
+      setMessage('Error durante el registro');
       console.error('Error durante el registro:', error);
     }
   };
@@ -33,6 +53,7 @@ function RegistroPage() {
       <div className="registro-container">
         <img src={logo} alt="Logo" className="logo" />
         <h1 className="registro-title">Puedes registrarte aquí</h1>
+        {message && <p className="message">{message}</p>}
         <form onSubmit={handleRegister} className="registro-form">
           <div className="form-group">
             <label htmlFor="username">Nombre de usuario:</label>
@@ -73,3 +94,6 @@ function RegistroPage() {
 }
 
 export default RegistroPage;
+
+
+

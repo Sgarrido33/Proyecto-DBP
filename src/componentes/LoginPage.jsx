@@ -2,15 +2,33 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
 import logo from '../imagenes/logo.png';
-
+import axios from 'axios';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = () => {
-    // Lógica para enviar datos de inicio de sesión al backend
-    console.log('Iniciar sesión:', email, password);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setErrorMessage('Por favor, completa todos los campos');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/login', {
+        email,
+        password
+      });
+
+      console.log('Inicio de sesión exitoso:', response.data);
+      // Redireccionar al usuario a la página de inicio o cualquier otra página necesaria
+    } catch (error) {
+      console.error('Error durante el inicio de sesión:', error);
+      // Mostrar mensaje de error en la página web si es necesario
+      setErrorMessage('Error durante el inicio de sesión. Por favor, verifica tus credenciales.');
+    }
   };
 
   return (
@@ -39,6 +57,7 @@ function LoginPage() {
               placeholder="Ingresa tu contraseña"
             />
           </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
           <button type="submit" className="login-button">Iniciar sesión</button>
         </form>
         <p className="signup-link">¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link></p>
