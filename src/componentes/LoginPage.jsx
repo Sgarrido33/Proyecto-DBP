@@ -22,14 +22,19 @@ function LoginPage() {
         password
       });
 
-      console.log('Inicio de sesión exitoso:', response.data);
-      // Redireccionar al usuario a la página de inicio o cualquier otra página necesaria
+      if (response.data.success) {
+        console.log('Inicio de sesión exitoso:', response.data);
+        window.location.href = '/menu';
+      } else {
+        console.log('Error durante el inicio de sesión:', response.data.error);
+        setErrorMessage('Error. Por favor, verifica tus credenciales.');
+      }
     } catch (error) {
       console.error('Error durante el inicio de sesión:', error);
-      // Mostrar mensaje de error en la página web si es necesario
-      setErrorMessage('Error durante el inicio de sesión. Por favor, verifica tus credenciales.');
+      setErrorMessage('Error. Por favor, verifica tus credenciales.');
     }
   };
+
 
   return (
     <div className="login-page">

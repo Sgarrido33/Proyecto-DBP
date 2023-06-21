@@ -169,21 +169,22 @@ def usuario(username):
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    email = data['email']
-    password = data['password']
+    email = data.get('email')
+    password = data.get('password')
+
     if not email or not password:
-        return jsonify({'message': 'Email y contraseña son necesarios'})
-    
+        return jsonify({'success': False, 'error': 'Email and password are required'})
+
     usuario = Usuario.query.filter_by(email=email).first()
-    
+
     if not usuario or not usuario.check_password(password):
-        return jsonify({'message': 'Usuario y contraseña no validos'})
-    
-    usuario_data={
+        return jsonify({'success': False, 'error': 'Invalid email or password'})
+
+    usuario_data = {
         'username': usuario.username,
-        'email': usuario.email
+        'email': usuario.email,
     }
-    return jsonify(usuario_data)
+    return jsonify({'success': True, 'data': usuario_data})
 
 
 @app.route('/publicaciones', methods=['GET', 'POST'])
