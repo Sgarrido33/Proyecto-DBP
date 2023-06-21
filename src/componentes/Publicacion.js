@@ -10,9 +10,6 @@ function Publicacion (props) {
     return(
     <div className="contenedor-publicacion">
         
-        <img className="imagen-planta" 
-        src={require(`../imagenes/${datos.imagen}.jpg`)}
-        alt="planta"></img>
         <div className="contenedor-texto-planta">
             {datos.map((publicacion) => (
             <p key={publicacion.id}>

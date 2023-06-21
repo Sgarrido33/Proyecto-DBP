@@ -35,8 +35,8 @@ function App() {
             {showJardin && <Plantas />}
           </div>
 
-          <div className='Logros'>
-  
+          <div className='Publicaciones'>
+            {showPublicaciones &&<Publicaciones/>}  
           </div>
           
         </div>

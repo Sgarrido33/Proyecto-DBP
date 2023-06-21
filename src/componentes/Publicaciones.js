@@ -13,8 +13,8 @@ function Publicaciones(){
   }, []);
   const fetchData = async () => {
     try {
-      const response = await axios.get("/publicaciones");
-      setDatos(response.datos);
+      const response = await axios.get("http://127.0.0.1:5000/publicaciones");
+      setDatos(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +56,7 @@ function Publicaciones(){
       // Aquí puedes realizar la solicitud DELETE a la API para eliminar la planta con el ID proporcionado
       // Puedes utilizar axios o fetch para realizar la solicitud
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la eliminación
-      fetch(`/planta/${id}`, {
+      fetch(`/publcacion/${id}`, {
         method: 'DELETE',
     }).then(response =>response.text())
     .then(text => {
@@ -74,45 +74,51 @@ function Publicaciones(){
 
   const createPublicacion = async () => {
     try {
-      // Aquí puedes realizar la solicitud POST a la API para crear una nueva planta
-      // Puedes utilizar axios o fetch para realizar la solicitud
-      // Recuerda enviar los datos en el cuerpo de la solicitud
-      // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
-      var descripcion = document.getElementById("descrip").value;
-    var tipo = document.getElementById("tipo").value;
-    var asunto = document.getElementById("asunto").value;
-    var user=document.getElementById("username").value;
-    var data={"descripcion": descripcion, "tipo":tipo, "asunto":asunto,"usuario":user}
-
-
-    fetch(`publicaciones`,{
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
-    })
+      const descripcion = document.getElementById("descript").value;
+      const tipo = document.getElementById("tipo").value;
+      const asunto = document.getElementById("asunto").value;
+      const user = document.getElementById("username").value;
+      const archivo = document.getElementById("archivo").files[0];
+  
+      const formData = new FormData();
+      formData.append("descripcion", descripcion);
+      formData.append("tipo", tipo);
+      formData.append("asunto", asunto);
+      formData.append("usuario", user);
+      formData.append("archivo", archivo);
+  
+      const response = await axios.post("/publicaciones", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      if (response.data === "SUCCESS") {
+        fetchData();
+      } else {
+        alert("Error al crear la publicación");
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  
+  
   return (
     <div>
         <div className="form">
           <label htmlFor="descript">Descripcion:</label>
           <input type="text" id="descript" />
           <label htmlFor="tipo">Tipo:</label>
-          <input type="text" id="tipo" />
+          <select name="transporte">
+            <option>Seleccione</option>
+            <option>Dar consejo</option>
+            <option>Pedir ayuda</option>
+          </select>
           <label htmlFor="asunto">Asunto:</label>
           <input type="text" id="Asunto" />
+          <label htmlFor='media'>Media:</label>
+          <input type='file' id="media"></input>
           <button type="button" onClick={createPublicacion}>
           Crear Publicacion </button>
         </div>
