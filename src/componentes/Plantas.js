@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../stylesheets/Plantas.css'
+import '../stylesheets/Plantas.css';
+
 function Plantas() {
   const [data, setData] = useState([]);
 
@@ -10,7 +11,7 @@ function Plantas() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/plantas");
+      const response = await axios.get("http://127.0.0.1:5000/plantas");
       setData(response.data);
     } catch (error) {
       console.error(error);
@@ -77,7 +78,7 @@ function Plantas() {
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
       var username = document.getElementById("username").value;
     var especie = document.getElementById("especie").value;
-    var edad_inicial = document.getElementById("edad_inicial")
+    var edad_inicial = document.getElementById("edad_inicial").value;
     var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
 
     fetch(`plantas`,{
@@ -112,8 +113,6 @@ function Plantas() {
         <input type="text" id="edad_inicial" />
         <button type="button" onClick={createPlant}>
         Añadir Planta </button>
-        
-        
         </div>
       <table id="tabla-jardin">
         <thead>
@@ -121,6 +120,7 @@ function Plantas() {
             <th>Nombre</th>
             <th>Especie</th>
             <th>Edad Inicial</th>
+            <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -130,6 +130,7 @@ function Plantas() {
               <td>{plant.username}</td>
               <td>{plant.especie}</td>
               <td>{plant.edad_inicial}</td>
+              <td>{plant.cantidad}</td>
               <td>
                 <button type="button" onClick={() => editPlant(plant.id)}>
                   Editar

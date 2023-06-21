@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from flask import Flask, jsonify, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
@@ -14,6 +15,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'my_secret_key'
 
 db = SQLAlchemy(app)
+
+CORS(app, resources={r"/*": {"origins": "*"}})  # Habilita CORS para todas las rutas en tu aplicación Flask
 
  
 class Usuario(UserMixin, db.Model):
@@ -235,7 +238,8 @@ def get_plantas():
                 'plant_id': planta.plant_id,
                 'especie': planta.especie,
                 'username': planta.username,
-                'edad_inicial': planta.edad_inicial
+                'edad_inicial': planta.edad_inicial,
+                'cantidad':planta.cantidad
             })
         return jsonify(plantas_list)
     if request.method == 'POST':
@@ -250,7 +254,8 @@ def get_plantas():
             'plant_id': planta.plant_id,
             'especie': planta.especie,
             'username': planta.username,
-            'edad_inicial': planta.edad_inicial
+            'edad_inicial': planta.edad_inicial,
+            'cantidad':planta.cantidad
         })
 
 @app.route('/plantas/<plant_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -265,7 +270,8 @@ def planta(plant_id):
             'plant_id': planta.plant_id,
             'especie': planta.especie,
             'username': planta.username,
-            'edad_inicial': planta.edad_inicial
+            'edad_inicial': planta.edad_inicial,
+            'cantidad':planta.cantidad
         })
 
     if request.method == 'PUT':
@@ -278,7 +284,8 @@ def planta(plant_id):
             'plant_id': planta.plant_id,
             'especie': planta.especie,
             'username': planta.username,
-            'edad_inicial': planta.edad_inicial
+            'edad_inicial': planta.edad_inicial,
+            'cantidad':planta.cantidad
         })
 
     if request.method == 'DELETE':

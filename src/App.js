@@ -10,9 +10,9 @@ import Plantas from './componentes/Plantas';
 
 
 function App() {
-  const [showJardin, setShowJardin] = useState(false);
+  const [showJardin, setShowJardin] = useState(true);
   const [showLogros, setShowLogros] = useState(false);
-  const [showPublicaciones,setShowPublicaciones]=useState(true)
+  const [showPublicaciones,setShowPublicaciones]=useState(false)
 
 
   return (
@@ -36,16 +36,8 @@ function App() {
           </div>
 
           <div className='Logros'>
-            {
-              showLogros && <div className='Logros'>
-                <Logros/>
-                </div>
-            }
+  
           </div>
-          
-          {
-            showPublicaciones &&<Publicaciones/>
-          }
           
         </div>
       </div>
