@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HomePage.css';
+import '../stylesheets/HomePage.css';
 import logo from '../imagenes/logo.png';
 import background from '../imagenes/BG.jpg';
 
@@ -10,7 +10,7 @@ function HomePage() {
       <div className="home-container">
         <img src={logo} alt="Logo" className="logo" />
         <div className="home-content">
-          <h1 className="home-title">(Nombre de la pagina no me acuerdo xd)</h1>
+          <h1 className="home-title">PlantPals</h1>
           <p className="home-description">Bienvenido a la página de inicio.</p>
           <p className="home-description">Logeate para poder acceder al menú y comenzar a interactuar.</p>
           <div className="home-links">
