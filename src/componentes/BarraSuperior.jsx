@@ -1,6 +1,8 @@
 import React from "react";
 import '../stylesheets/BarraSuperior.css'
 import Logo from "./Logo";
+import { Link } from 'react-router-dom';
+
 //perfil visible
 
 function BarraSuperior (props){
