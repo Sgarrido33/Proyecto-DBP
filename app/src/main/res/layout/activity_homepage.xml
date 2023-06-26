@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/BG">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="155dp"
+        android:layout_height="173dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="57dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="304dp"
+        android:layout_height="368dp"
+        android:background="#99000000"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="281dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="301dp"
+            android:layout_height="53dp"
+            android:gravity="center"
+            android:text="Bienvenido a la página de inicio"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#EDEBEB"
+            tools:layout_editor_absoluteY="28dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="305dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:textColor="#EDEBEB"
+            android:text="Logeate para poder acceder al menú y comenzar a interactuar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="navigateToRegister"
+            android:text="Registrate"
+            tools:layout_editor_absoluteX="96dp"
+            tools:layout_editor_absoluteY="209dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="navigateToLogin"
+            android:text="Inicia sesión"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="287dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
