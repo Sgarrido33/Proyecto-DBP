@@ -4,61 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/BG">
+    android:background="@drawable/background">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="155dp"
         android:layout_height="173dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="57dp" />
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="501dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="304dp"
         android:layout_height="368dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="281dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="82dp"
         android:background="#99000000"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="281dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="301dp"
             android:layout_height="53dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="290dp"
             android:gravity="center"
             android:text="Bienvenido a la página de inicio"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#EDEBEB"
-            tools:layout_editor_absoluteY="28dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="305dp"
             android:layout_height="55dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginBottom="224dp"
             android:gravity="center"
-            android:textColor="#EDEBEB"
             android:text="Logeate para poder acceder al menú y comenzar a interactuar"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="91dp" />
+            android:textColor="#EDEBEB"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="navigateToRegister"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="208dp"
+            android:layout_marginEnd="95dp"
+            android:layout_marginBottom="112dp"
             android:text="Registrate"
-            tools:layout_editor_absoluteX="96dp"
-            tools:layout_editor_absoluteY="209dp" />
+            android:onClick="navigateToRegister"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="navigateToLogin"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="286dp"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="34dp"
             android:text="Inicia sesión"
-            tools:layout_editor_absoluteX="88dp"
-            tools:layout_editor_absoluteY="287dp" />
+            android:onClick="navigateToLogin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

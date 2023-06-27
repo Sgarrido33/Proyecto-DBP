@@ -10,61 +10,97 @@
         android:id="@+id/button2"
         android:layout_width="123dp"
         android:layout_height="56dp"
+        android:layout_marginStart="235dp"
+        android:layout_marginTop="663dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="12dp"
         android:onClick="navigateToRegister"
         android:text="Registrate"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="663dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="187dp"
         android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="675dp"
+        android:layout_marginEnd="208dp"
+        android:layout_marginBottom="13dp"
         android:gravity="center"
         android:text="¿Todavía no tienes una cuenta?"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="675dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="670dp"
         android:text="Inicio de sesión"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="29dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="369dp"
+        android:layout_marginBottom="317dp"
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="369dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="472dp"
+        android:layout_marginBottom="214dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="472dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="133dp"
+        android:layout_marginBottom="93dp"
         android:text="Iniciar sesión"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="590dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="156dp"
         android:layout_height="162dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="103dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="466dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
