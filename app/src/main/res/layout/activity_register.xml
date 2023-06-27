@@ -71,6 +71,7 @@
         android:id="@+id/button"
         android:layout_width="111dp"
         android:layout_height="58dp"
+        android:onClick="navigateToLogin"
         android:text="Iniciar sesión"
         tools:layout_editor_absoluteX="235dp"
         tools:layout_editor_absoluteY="663dp" />

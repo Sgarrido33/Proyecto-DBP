@@ -10,6 +10,7 @@
         android:id="@+id/button2"
         android:layout_width="123dp"
         android:layout_height="56dp"
+        android:onClick="navigateToRegister"
         android:text="Registrate"
         tools:layout_editor_absoluteX="235dp"
         tools:layout_editor_absoluteY="663dp" />
