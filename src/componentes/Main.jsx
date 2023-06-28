@@ -1,7 +1,9 @@
-import React,{ useState } from 'react';
+import React,{ useState,setState, useContext } from 'react';
+import { UserContext } from '../UserContext';
 import Plantas from './Plantas';
 import Publicaciones from './Publicaciones';
 import BarraSuperior from './BarraSuperior';
+import '../stylesheets/main.css'
 import Menu from './Menu';
 import Logro from './Logro';
 import { Link } from 'react-router-dom';
@@ -34,7 +36,6 @@ function Main() {
         <div className='Menu'>
           <Menu
           foto='incognito'
-          user='user1234'
           />
         </div>
       </div>  

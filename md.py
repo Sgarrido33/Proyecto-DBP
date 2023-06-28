@@ -168,6 +168,26 @@ def usuario(username):
         db.session.commit()
         return jsonify({'message': 'Usuario eliminado'})
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'success': False, 'error': 'Email and password are required'})
+
+    usuario = Usuario.query.filter_by(email=email).first()
+
+    if not usuario or not usuario.check_password(password):
+        return jsonify({'success': False, 'error': 'Invalid email or password'})
+
+    usuario_data = {
+        'username': usuario.username,
+        'email': usuario.email,
+    }
+    return jsonify({'success': True, 'data': usuario_data})
+
 
 
 @app.route('/publicaciones', methods=['GET', 'POST'])
@@ -373,6 +393,13 @@ def get_comentarios():
         pub_id = data['pub_id']
         contenido = data['contenido']
         comentario = Comentario(pub_id=pub_id, contenido=contenido)
+         # Aquí se asocia el comentario a la publicación
+        publicacion = Publicacion.query.get(pub_id)
+        if not publicacion:
+            return jsonify({'message': 'Publicación no encontrada'})
+        
+        comentario.publicacion = publicacion
+        
         db.session.add(comentario)
         db.session.commit()
         return jsonify({
