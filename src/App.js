@@ -1,22 +1,15 @@
 import './App.css';
 import LoginPage from './componentes/LoginPage';
 import { useState } from 'react';
-<<<<<<< HEAD
-import RegistroPage from './componentes/RegistroPage';
-
-import Main from './componentes/Main';
-=======
 import RegisterPage from './componentes/RegisterPage';
 import { UserProvider } from './UserContext';
 import Main from './componentes/main';
->>>>>>> 941a2490794c5000f5dd216caed57efd25018ddb
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegisLogin from './componentes/RegisLogin';
 import HomePage from './componentes/HomePage';
 
 import React from 'react';
 import RegistroPage from './componentes/RegistroPage';
-
 function App() {
 
   return (
