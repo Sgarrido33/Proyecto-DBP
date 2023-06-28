@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import Publicacion from './Publicacion'
+
 function Publicaciones(){
     const [datos, setDatos] = useState([]);
 
@@ -25,27 +26,30 @@ function Publicaciones(){
       // Puedes utilizar axios o fetch para realizar la solicitud
       // Recuerda enviar los datos en el cuerpo de la solicitud
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la edición
-      var descripcion = document.getElementById("descrip").value;
-    var tipo = document.getElementById("tipo").value;
-    var asunto = document.getElementById("asunto").value;
-    var user=document.getElementById("username").value;
-    var data={"descripcion": descripcion, "tipo":tipo, "asunto":asunto,"usuario":user}
-
-    fetch(`/publicacion/${id}`, {
-        method: 'PUT',
+      const descripcion = document.getElementById("descript").value;
+    const tipo = document.getElementById("tipo").value;
+    const asunto = document.getElementById("asunto").value;
+    const user=document.getElementById("username").value;
+    const data={"descripcion": descripcion, "tipo":tipo, "asunto":asunto,"usuario":user}
+    
+    axios
+    .put(`http://127.0.0.1:5000/publicacion/${id}`,{
         body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
         }
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
+      })
+        .then(
+          response =>response.text())
+        .then(text => {
+            if(text==="SUCCESS"){
+                fetchData();
+            }
+            else{
+                alert("Error")
+            }
     })
+    
     } catch (error) {
       console.error(error);
     }
@@ -56,17 +60,17 @@ function Publicaciones(){
       // Aquí puedes realizar la solicitud DELETE a la API para eliminar la planta con el ID proporcionado
       // Puedes utilizar axios o fetch para realizar la solicitud
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la eliminación
-      fetch(`/publcacion/${id}`, {
-        method: 'DELETE',
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
-    })
+      axios
+      .delete(`http://127.0.0.1:5000/publicacion/${id}`)
+      .then(response =>response.text())
+      .then(text => {
+          if(text==="SUCCESS"){
+              fetchData();
+          }
+          else{
+              alert("Error")
+          }
+      });
     } catch (error) {
       console.error(error);
     }
@@ -116,7 +120,7 @@ function Publicaciones(){
             <option>Pedir ayuda</option>
           </select>
           <label htmlFor="asunto">Asunto:</label>
-          <input type="text" id="Asunto" />
+          <input type="text" id="asunto" />
           <label htmlFor='media'>Media:</label>
           <input type='file' id="media"></input>
           <button type="button" onClick={createPublicacion}>

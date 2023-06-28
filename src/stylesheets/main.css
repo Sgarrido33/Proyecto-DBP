@@ -1,0 +1,27 @@
+.izquierda{
+    min-width: 1173px;
+    max-width:1175px;
+    max-height: 905px;
+  }
+  .Contenido{
+      width:1000px;
+      height: auto;
+      justify-content: center;
+      align-items: center;
+  }
+  .Menu{
+      justify-content: right;
+  }
+  .button {
+    width: 100px;
+    height: 50px;
+    font-size: 35px;
+    font-family: Robot, sans-serif;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    border-radius: 15px;
+    margin: 5px;
+      cursor: pointer;
+  }
+  
