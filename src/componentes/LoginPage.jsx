@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '../stylesheets/LoginPage.css';
 import logo from '../imagenes/PlantPals_Logo_v1.png';
 import axios from 'axios';
+import {userContext} from '../UserContext'
 
 function LoginPage() {
   const [email, setEmail] = useState('');
