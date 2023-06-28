@@ -12,17 +12,17 @@ function Publicacion (props) {
         
         <div className="contenedor-texto-planta">
             {datos.map((publicacion) => (
-            <p key={publicacion.id}>
+            <p key={publicacion.pub_id}>
                 {publicacion.username}
-                {publicacion.descript}
+                {publicacion.descripcion}
             </p>
             ))}
         </div>
         <div className="contenedor-comentarios">
             {datos.map((publicacion) => (
-            <p key={publicacion.id}>
+            <p key={publicacion.pub_id}>
                 Comentarios: 
-                {publicacion.comentarios}
+                {publicacion.comments}
                 <Comentarios/>
             </p>
             ))}

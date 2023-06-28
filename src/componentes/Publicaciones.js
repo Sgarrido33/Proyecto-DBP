@@ -78,7 +78,7 @@ function Publicaciones(){
 
   const createPublicacion = async () => {
     try {
-      const descripcion = document.getElementById("descript").value;
+      const descripcion = document.getElementById("descripcion").value;
       const tipo = document.getElementById("tipo").value;
       const asunto = document.getElementById("asunto").value;
       const user = document.getElementById("username").value;

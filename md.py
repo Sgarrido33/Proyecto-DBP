@@ -394,6 +394,13 @@ def get_comentarios():
         pub_id = data['pub_id']
         contenido = data['contenido']
         comentario = Comentario(pub_id=pub_id, contenido=contenido)
+         # Aquí se asocia el comentario a la publicación
+        publicacion = Publicacion.query.get(pub_id)
+        if not publicacion:
+            return jsonify({'message': 'Publicación no encontrada'})
+        
+        comentario.publicacion = publicacion
+        
         db.session.add(comentario)
         db.session.commit()
         return jsonify({

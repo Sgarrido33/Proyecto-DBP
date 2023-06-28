@@ -20,14 +20,10 @@ function Plantas() {
 
   const editPlant = async (id) => {
     try {
-      // Aquí puedes realizar la solicitud PUT a la API para editar la planta con el ID proporcionado
-      // Puedes utilizar axios o fetch para realizar la solicitud
-      // Recuerda enviar los datos en el cuerpo de la solicitud
-      // Luego, puedes llamar a fetchData() para actualizar los datos después de la edición
       var username = document.getElementById("username").value;
-    var especie = document.getElementById("especie").value;
-    var edad_inicial = document.getElementById("edad_inicial")
-    var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
+      var especie = document.getElementById("especie").value;
+      var edad_inicial = document.getElementById("edad_inicial").value
+      var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
 
     fetch(`/planta/${id}`, {
         method: 'PUT',
@@ -51,9 +47,6 @@ function Plantas() {
 
   const deletePlant = async (id) => {
     try {
-      // Aquí puedes realizar la solicitud DELETE a la API para eliminar la planta con el ID proporcionado
-      // Puedes utilizar axios o fetch para realizar la solicitud
-      // Luego, puedes llamar a fetchData() para actualizar los datos después de la eliminación
       fetch(`/planta/${id}`, {
         method: 'DELETE',
     }).then(response =>response.text())
@@ -72,10 +65,6 @@ function Plantas() {
 
   const createPlant = async () => {
     try {
-      // Aquí puedes realizar la solicitud POST a la API para crear una nueva planta
-      // Puedes utilizar axios o fetch para realizar la solicitud
-      // Recuerda enviar los datos en el cuerpo de la solicitud
-      // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
       var username = document.getElementById("username").value;
     var especie = document.getElementById("especie").value;
     var edad_inicial = document.getElementById("edad_inicial").value;
@@ -95,18 +84,20 @@ function Plantas() {
         else{
             alert("Error")
         }
-    })
-    } catch (error) {
+    }) 
+    .catch(error => {
       console.error(error);
-    }
-  };
-
+      alert("Error al añadir planta");
+    });
+  } catch (error) {
+    console.error(error);
+    alert("Error al añadir planta");
+  }
+}
   return (
     <div>
     <div className="Jardin">
         <div className="form">
-        <label htmlFor="username">Nombre:</label>
-        <input type="text" id="username" />
         <label htmlFor="especie">Especie:</label>
         <input type="text" id="especie" />
         <label htmlFor="edad_inicial">Edad Inicial:</label>
@@ -120,6 +111,7 @@ function Plantas() {
             <th>Nombre</th>
             <th>Especie</th>
             <th>Edad Inicial</th>
+            <th>Fecha de registro</th>
             <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
@@ -130,6 +122,7 @@ function Plantas() {
               <td>{plant.username}</td>
               <td>{plant.especie}</td>
               <td>{plant.edad_inicial}</td>
+              <td>{plant.fecha_registro}</td>
               <td>{plant.cantidad}</td>
               <td>
                 <button type="button" onClick={() => editPlant(plant.id)}>

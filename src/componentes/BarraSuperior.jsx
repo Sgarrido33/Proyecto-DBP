@@ -16,7 +16,7 @@ function BarraSuperior (props){
                  <p className="NomApp">PlantPals</p>
             </div>
             <div className="contenedor-opciones">
-                <button onclick="window.location.href='/Jardin.js'">Mi Jardin</button>
+                <button onClick="window.location.href='/Jardin.js'">Mi Jardin</button>
                 <button onClick="window.location.href='/Logros.js'">Logros</button>
                 <button onClick="window.location.href='/Publicaciones.js'">Publicaciones</button>
             </div>
