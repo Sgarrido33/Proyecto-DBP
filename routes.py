@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from models import app, db, Usuario, Publicacion, Planta,Logro,Comentario,meGusta
+from models import app, db, Usuario, Publicacion, Planta, Logro, Comentario, meGusta
 
 @app.route('/usuarios', methods=['GET', 'POST'])
 def get_usuarios():

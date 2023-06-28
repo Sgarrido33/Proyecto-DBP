@@ -84,6 +84,8 @@ class meGusta(db.Model):
     pub_id = db.Column(db.Integer,
                         db.ForeignKey('Publicacion.pub_id'),
                         primary_key=True)
+
+
 def guardar_imagen(imagen, pub_id):
     #Guardar la imagen en el directorio configurado
     ruta = os.path.join(os.getcwd(), 'static')

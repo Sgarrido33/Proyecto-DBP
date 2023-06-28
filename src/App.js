@@ -1,4 +1,3 @@
-
 import './App.css';
 import Publicacion from './componentes/Publicacion';
 import Perfil from './componentes/Perfil';
