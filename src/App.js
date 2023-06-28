@@ -2,7 +2,7 @@ import './App.css';
 
 import LoginPage from './componentes/LoginPage';
 import { useState } from 'react';
-import RegisterPage from './componentes/RegisterPage';
+import RegistroPage from './componentes/RegistroPage';
 
 import Main from './componentes/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -19,7 +19,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/*" element={<HomePage />} />
-            <Route path="/registro-login" element={<RegisLogin />} />
+            <Route path="/registro" element={<RegistroPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path='/main' element={<Main />}/>
           </Routes>
         </Router>
