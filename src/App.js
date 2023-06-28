@@ -1,30 +1,36 @@
 import './App.css';
-import Publicacion from './componentes/Publicacion';
-import Perfil from './componentes/Perfil';
+
+import LoginPage from './componentes/LoginPage';
 import { useState } from 'react';
+import RegisterPage from './componentes/RegisterPage';
+
+import Main from './componentes/Main';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RegisLogin from './componentes/RegisLogin';
+import HomePage from './componentes/HomePage';
+
+
 
 function App() {
-  const [numlike, setNumLike] = useState(0);
-
-  const like = () => {
-    setNumLike(numlike + 1);
-  }  
 
   return (
     <div className="App">
-      <Perfil
-      imagen={'planta1'}
-      usuario={'user1234'}
-      email={'user1234@hotmail.com'}
-      />
+      <div className='general'>
+        <Router>
+          <Routes>
+            <Route path="/*" element={<HomePage />} />
+            <Route path="/registro-login" element={<RegisLogin />} />
+            <Route path='/main' element={<Main />}/>
+          </Routes>
+        </Router>
+      </div>
       
-      <Publicacion
-        imagen={'planta1'}
-        nombre={'Planta'}
-        texto={'blablabla'}
-      />
     </div>
   );
 }
+
+
+
+
 
 export default App;

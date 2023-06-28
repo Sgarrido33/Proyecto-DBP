@@ -1,4 +1,21 @@
 .App{
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  text-align: center;
+}
+.izquierda{
+  min-width: 1173px;
+  max-width:1175px;
+  max-height: 905px;
+}
+.Contenido{
+    width:1000px;
+    height: auto;
     justify-content: center;
+    align-items: center;
+}
+.Menu{
+    justify-content: right;
 }
