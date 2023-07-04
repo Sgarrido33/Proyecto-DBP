@@ -25,7 +25,7 @@ function Plantas() {
       var edad_inicial = document.getElementById("edad_inicial").value
       var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
 
-    fetch(`/planta/${id}`, {
+    fetch(`http://127.0.0.1:5000/planta/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers:{
@@ -47,21 +47,19 @@ function Plantas() {
 
   const deletePlant = async (id) => {
     try {
-      fetch(`/planta/${id}`, {
-        method: 'DELETE',
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
-    })
+      const response = await axios.delete(`http://127.0.0.1:5000/plantas/${id}`);
+  
+      if (response.status === 200) {
+        fetchData(); // Fetch updated data
+      } else {
+        throw new Error("Error deleting plant");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting plant:", error);
+      alert("Error al eliminar planta");
     }
   };
+  
 
   const createPlant = async () => {
     try {
@@ -70,34 +68,25 @@ function Plantas() {
     var edad_inicial = document.getElementById("edad_inicial").value;
     var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
 
-    fetch(`plantas`,{
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
-    }) 
-    .catch(error => {
-      console.error(error);
-      alert("Error al añadir planta");
-    });
+    const response = await axios.post("http://127.0.0.1:5000/plantas",data);
+    if (response.status === 200) {
+      fetchData();
+    } else {
+      throw new Error("Error al crear planta");
+    }
   } catch (error) {
-    console.error(error);
-    alert("Error al añadir planta");
+    console.error("Error creating plant:",error);
+    alert("Error al crear planta")
   }
+
+    
 }
   return (
     <div>
     <div className="Jardin">
         <div className="form">
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username" />
         <label htmlFor="especie">Especie:</label>
         <input type="text" id="especie" />
         <label htmlFor="edad_inicial">Edad Inicial:</label>
