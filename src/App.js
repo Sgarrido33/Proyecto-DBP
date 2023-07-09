@@ -3,7 +3,7 @@ import LoginPage from './componentes/LoginPage';
 import { useState } from 'react';
 import RegisterPage from './componentes/RegisterPage';
 import { UserProvider } from './UserContext';
-import Main from './componentes/main';
+import Main from './componentes/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegisLogin from './componentes/RegisLogin';
 import HomePage from './componentes/HomePage';

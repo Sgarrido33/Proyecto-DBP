@@ -33,11 +33,11 @@ function LoginPage() {
         window.location.href = '/main';
       } else {
         console.log('Error durante el inicio de sesión:', response.data.error);
-        setErrorMessage('Error. Por favor, verifica tus credenciales.');
+        setErrorMessage('Error. Por favor, verifica tus credenciales 1.');
       }
     } catch (error) {
       console.error('Error durante el inicio de sesión:', error);
-      setErrorMessage('Error. Por favor, verifica tus credenciales.');
+      setErrorMessage('Error. Por favor, verifica tus credenciales 2.');
     }
     
   };
