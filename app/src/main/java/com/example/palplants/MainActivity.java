@@ -23,4 +23,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
+
+    public void navigateToGarden(View view){
+        Intent intent = new Intent(this, GardenActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigateToPlant(View view){
+        Intent intent = new Intent(this, PlantActivity.class);
+    }
+
+
 }
