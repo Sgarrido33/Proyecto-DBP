@@ -267,6 +267,19 @@ def get_plantas():
         especie = data['especie']
         username = data['username']
         edad_inicial = data['edad_inicial']
+        
+        existing_plant = Planta.query.filter_by(especie=especie, edad_inicial=edad_inicial).first()
+        if existing_plant:
+            existing_plant.cantidad += 1  # Aumentar la cantidad en una unidad
+            db.session.commit()
+            return jsonify({
+                'plant_id': existing_plant.plant_id,
+                'especie': existing_plant.especie,
+                'username': existing_plant.username,
+                'edad_inicial': existing_plant.edad_inicial,
+                'cantidad': existing_plant.cantidad
+            })
+
         planta = Planta(especie=especie, username=username, edad_inicial=edad_inicial)
         db.session.add(planta)
         db.session.commit()
