@@ -18,13 +18,10 @@ function Main() {
         <div className='izquierda'>
           <div className='barra-superior'>
             <BarraSuperior/>
-            <button onClick={() => setShowJardin(!showJardin)}>
+            <button className='btn btn-primary btn-sm' onClick={() => setShowJardin(!showJardin)}>
               Mostrar/Ocultar Jardin
             </button>
-            <button onClick={() => setShowLogros(!showLogros)}>
-              Mostrar/Ocultar Logros
-            </button>
-            <button onClick={() => setShowPublicaciones(!showPublicaciones)}>
+            <button className='btn btn-primary btn-sm' onClick={() => setShowPublicaciones(!showPublicaciones)}>
               Mostrar/Ocultar Publicaciones
             </button>
           </div>

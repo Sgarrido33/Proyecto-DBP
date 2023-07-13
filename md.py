@@ -6,6 +6,8 @@ from flask_login import UserMixin
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from sqlalchemy.orm import relationship
+from datetime import date
 
 app = Flask(__name__)
 
@@ -46,8 +48,8 @@ class Planta(db.Model):
     especie = db.Column(db.String(50), unique=True, nullable=False)
     username = db.Column(db.String(50), db.ForeignKey('Usuario.username'))
     edad_inicial = db.Column(db.Float, default=0.0)
-    fecha_registro = db.Column(db.Date, default=datetime.date.today())
-    cantidad = db.Column(db.Integer, default=1)
+    fecha_registro = db.Column(db.Date, server_default=datetime.date.today().strftime('%Y-%m-%d'))
+    cantidad = db.Column(db.Integer, server_default='1')
 
 
 class Publicacion(db.Model):
@@ -121,6 +123,7 @@ def get_usuarios():
         username = data['username']
         email = data['email']
         password = data['password']
+        print("kjsdxcnsjdcbnasdcsda")
         
         if Usuario.query.filter_by(email=email).first():
             return jsonify({'error': 'Email already exists'})
@@ -254,11 +257,18 @@ def get_plantas():
         plantas = Planta.query.all()
         plantas_list = []
         for planta in plantas:
+            edad_inicial = planta.edad_inicial
+            fecha_registro = planta.fecha_registro
+            dias_transcurridos = (date.today() - fecha_registro).days
+            meses_transcurridos = dias_transcurridos / 30
+            edad = edad_inicial + meses_transcurridos
+
             plantas_list.append({
                 'plant_id': planta.plant_id,
                 'especie': planta.especie,
                 'username': planta.username,
-                'edad_inicial': planta.edad_inicial,
+                'edad': edad,
+                'fecha_registro': planta.fecha_registro,
                 'cantidad':planta.cantidad
             })
         return jsonify(plantas_list)
