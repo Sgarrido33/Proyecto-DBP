@@ -72,10 +72,10 @@ public class GardenActivity extends AppCompatActivity {
             }
         });
     }
-
+    private static final int REGISTER_PLANT_REQUEST_CODE = 1;
     private void openPlantActivity() {
         Intent intent = new Intent(this, PlantActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,REGISTER_PLANT_REQUEST_CODE);
     }
 
     private void fetchData() {
@@ -103,19 +103,47 @@ public class GardenActivity extends AppCompatActivity {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jsonObject = response.getJSONObject(i);
                 String species = jsonObject.getString("especie");
-                String inscriptionDate = jsonObject.getString("fecha_registro");
                 int initialAge = jsonObject.getInt("edad_inicial");
                 String user = jsonObject.getString("username");
 
-                Plant plant = new Plant(species, inscriptionDate, initialAge, user);
+                Plant plant = new Plant(species, initialAge, user);
                 plantList.add(plant);
             }
 
-            plantAdapter.notifyDataSetChanged();
+            plantAdapter.updateData(plantList);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REGISTER_PLANT_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Obtener los datos de la planta registrada desde el intent
+            String species = data.getStringExtra("species");
+            int plantInitialAge = data.getIntExtra("plantInitialAge",0);
+            String username = data.getStringExtra("username");
+
+            // Crear un nuevo objeto Plant con los datos recibidos
+            Plant plant = new Plant(species, plantInitialAge, username);
+
+            // Agregar la nueva planta a la lista y notificar al adaptador
+            plantList.add(plant);
+            plantAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void logout(View view) {
+        // Aquí puedes realizar cualquier operación necesaria para cerrar la sesión
+        // Por ejemplo, borrar los datos de usuario guardados en caché
+        userSession.clearSession();
+        // Luego, redirecciona a MainActivity
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Cierra GardenActivity para que no se pueda volver atrás
     }
 
     private class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> {
@@ -137,7 +165,6 @@ public class GardenActivity extends AppCompatActivity {
             Plant plant = plantList.get(position);
 
             holder.speciesTextView.setText(plant.getSpecies());
-            holder.inscriptionDateTextView.setText(plant.getInscriptionDate());
             holder.initialAgeTextView.setText(String.valueOf(plant.getInitialAge()));
             holder.userTextView.setText(plant.getUser());
         }
@@ -149,17 +176,20 @@ public class GardenActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView speciesTextView;
-            public TextView inscriptionDateTextView;
             public TextView initialAgeTextView;
             public TextView userTextView;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 speciesTextView = itemView.findViewById(R.id.speciesTextView);
-                inscriptionDateTextView = itemView.findViewById(R.id.inscriptionDateTextView);
                 initialAgeTextView = itemView.findViewById(R.id.initialAgeTextView);
                 userTextView = itemView.findViewById(R.id.userTextView);
             }
         }
+        public void updateData(List<Plant> plantList) {
+            this.plantList = plantList;
+            notifyDataSetChanged();
+        }
+
     }
 }

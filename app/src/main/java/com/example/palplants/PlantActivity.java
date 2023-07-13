@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class PlantActivity extends AppCompatActivity {
     private EditText plantTypeEditText;
-    private EditText plantInitialAgeEditText;;
+    private EditText plantInitialAgeEditText;
     private Button registerPlantButton;
 
     private RequestQueue requestQueue;
@@ -51,8 +51,8 @@ public class PlantActivity extends AppCompatActivity {
         finish();
     }
     private void registerPlant() {
-        String plantType = plantTypeEditText.getText().toString();
-        String plantInitialAge = plantInitialAgeEditText.getText().toString();
+        String species = plantTypeEditText.getText().toString();
+        int plantInitialAge = Integer.parseInt(plantInitialAgeEditText.getText().toString());
         UserSession userSession = UserSession.getInstance();
         String username = userSession.getUsername();
         String email = userSession.getEmail();
@@ -60,7 +60,7 @@ public class PlantActivity extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("especie", plantType);
+            jsonBody.put("especie", species);
             jsonBody.put("edad_inicial", plantInitialAge);
             jsonBody.put("username",username);
         } catch (JSONException e) {
@@ -75,6 +75,18 @@ public class PlantActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // Aquí puedes procesar la respuesta del servidor
                         Toast.makeText(PlantActivity.this, "Planta registrada exitosamente", Toast.LENGTH_SHORT).show();
+                        // Regresar a GardenActivity
+                        Intent intent = new Intent(PlantActivity.this, GardenActivity.class);
+                        startActivity(intent);
+                        // Crear un objeto Intent con los datos de la planta registrada
+                        Intent intent2 = new Intent();
+                        intent.putExtra("species", species);
+                        intent.putExtra("plantInitialAge", plantInitialAge);
+                        intent.putExtra("username", username);
+
+                        // Establecer el resultado como RESULT_OK y agregar el intent con los datos de la planta registrada
+                        setResult(RESULT_OK, intent2);
+                        finish(); // Finalizar PlantActivity para que no se pueda volver atrás
                     }
                 },
                 new Response.ErrorListener() {
