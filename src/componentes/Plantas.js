@@ -98,7 +98,7 @@ function Plantas() {
             </thead>
             <tbody>
               {data.map((plant) => (
-                <tr key={plant.id}>
+                <tr key={plant.plant_id}>
                   <td>{plant.username}</td>
                   <td>{plant.especie}</td>
                   <td>{plant.edad}</td>
@@ -106,13 +106,13 @@ function Plantas() {
                   <td>
                     <button
                       className="btn btn-secondary"
-                      onClick={() => editPlant(plant.id)}
+                      onClick={() => editPlant(plant.plant_id)}
                     >
                       Editar
                     </button>
                     <button
                       className="btn btn-danger btn-sm btn-block"
-                      onClick={() => deletePlant(plant.id)}
+                      onClick={() => deletePlant(plant.plant_id)}
                     >
                       Eliminar
                     </button>
