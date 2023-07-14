@@ -80,9 +80,9 @@ public class PlantActivity extends AppCompatActivity {
                         startActivity(intent);
                         // Crear un objeto Intent con los datos de la planta registrada
                         Intent intent2 = new Intent();
-                        intent.putExtra("species", species);
-                        intent.putExtra("plantInitialAge", plantInitialAge);
-                        intent.putExtra("username", username);
+                        intent2.putExtra("species", species);
+                        intent2.putExtra("plantInitialAge", plantInitialAge);
+                        intent2.putExtra("username", username);
 
                         // Establecer el resultado como RESULT_OK y agregar el intent con los datos de la planta registrada
                         setResult(RESULT_OK, intent2);
