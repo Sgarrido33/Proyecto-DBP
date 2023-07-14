@@ -29,7 +29,7 @@ function Publicacion (props) {
                         <div className='publicacion-main'>
                             <p className='publicacion-username'>{publicacion.username}</p>
                             <p>{publicacion.descripcion}</p>
-                            <img className='publicacion-image'  src={require(`../imagenes/planta1.jpg`)}></img>
+                            {publicacion?.imagen && <img className='publicacion-image' src={'http://127.0.0.1:5000/' + publicacion?.imagen}></img>}
                         </div>
                         <div className='publicacion-comentarios'>
                             <div style={{ }}>

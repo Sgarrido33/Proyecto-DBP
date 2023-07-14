@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from sqlalchemy.orm import relationship
 from datetime import date
+import uuid
 
 app = Flask(__name__)
 
@@ -197,27 +198,42 @@ def login():
 def get_publicaciones():
     if request.method == 'GET':
         publicaciones = Publicacion.query.all()
-
-        """for pub in publicaciones:
-            meGustas = MeGusta.query.get(pub.pub_id)
-            pub.meGustas = meGustas
-            print("hola",meGustas)"""
-
         publicaciones_json = [{'pub_id': publicacion.pub_id,
                               'descripcion': publicacion.descripcion,
                               'tipo': publicacion.tipo,
                               'asunto': publicacion.asunto,
-                              #'meGusta' : publicacion.meGustas,
-                              'username': publicacion.username} for publicacion in publicaciones]
-        return jsonify(publicaciones_json)
+                              'username': publicacion.username,
+                              #'imagen': 'static/imagenes/' + publicacion.imagen if publicacion.imagen else 'none'
+                              'imagen': '/static/imagenes/' + publicacion.imagen if publicacion.imagen else None
+                              } for publicacion in publicaciones]
+        
+        
+        return jsonify(publicaciones_json[::-1])
     
     if request.method == 'POST':
         descripcion = request.form.get('descripcion')
         tipo = request.form.get('tipo')
         asunto = request.form.get('asunto')
         username = request.form.get('username')
+        archivo = request.files.get('archivo')
+
+        unique_filename = ""
+
+        if archivo:
+            # Generate a unique filename using UUID
+            unique_filename = str(uuid.uuid4()) + os.path.splitext(archivo.filename)[1]
+            image_path = os.path.join("static/imagenes", unique_filename)
+            archivo.save(image_path)
+            print("Image path:", image_path)
+            print("unique_filename:", unique_filename)
+        else:
+            print("No file uploaded")
+
         
-        publicacion = Publicacion(descripcion=descripcion, tipo=tipo, asunto=asunto, username=username)
+        publicacion = Publicacion(descripcion=descripcion, tipo=tipo, asunto=asunto, username=username, imagen=unique_filename)
+
+        
+        
         db.session.add(publicacion)
         db.session.commit()
         
