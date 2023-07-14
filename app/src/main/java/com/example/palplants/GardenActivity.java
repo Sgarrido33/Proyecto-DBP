@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.TableLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +34,10 @@ import java.util.List;
 
 public class GardenActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private PlantAdapter plantAdapter;
-    private List<Plant> plantList;
-    private Button addPlantButton;
+    private TableLayout tableLayout;
     private RequestQueue requestQueue;
+
+    private List<Plant> plantList;
 
     UserSession userSession = UserSession.getInstance();
     String username = userSession.getUsername();
@@ -49,13 +50,7 @@ public class GardenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        addPlantButton = findViewById(R.id.addPlantButton);
-
-        plantList = new ArrayList<Plant>();
-        plantAdapter = new PlantAdapter(plantList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(plantAdapter);
+        tableLayout = findViewById(R.id.tableLayout);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -64,18 +59,6 @@ public class GardenActivity extends AppCompatActivity {
         userNameTextView.setText(username);
 
         fetchData();
-
-        addPlantButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPlantActivity();
-            }
-        });
-    }
-    private static final int REGISTER_PLANT_REQUEST_CODE = 1;
-    private void openPlantActivity() {
-        Intent intent = new Intent(this, PlantActivity.class);
-        startActivityForResult(intent,REGISTER_PLANT_REQUEST_CODE);
     }
 
     private void fetchData() {
@@ -103,37 +86,68 @@ public class GardenActivity extends AppCompatActivity {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jsonObject = response.getJSONObject(i);
                 String species = jsonObject.getString("especie");
+                String plantId = jsonObject.getString("plant_id");
                 int initialAge = jsonObject.getInt("edad_inicial");
                 String user = jsonObject.getString("username");
+                int quantity = jsonObject.getInt("cantidad");
 
-                Plant plant = new Plant(species, initialAge, user);
+                Plant plant = new Plant(plantId, species, username, initialAge, quantity);
                 plantList.add(plant);
+
+                addPlantToTable(species, initialAge, user);
             }
-
-            plantAdapter.updateData(plantList);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void addPlantToTable(String species, int initialAge, String user) {
+        TableRow row = new TableRow(this);
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
-        if (requestCode == REGISTER_PLANT_REQUEST_CODE && resultCode == RESULT_OK) {
-            // Obtener los datos de la planta registrada desde el intent
-            String species = data.getStringExtra("species");
-            int plantInitialAge = data.getIntExtra("plantInitialAge",0);
-            String username = data.getStringExtra("username");
+        TextView speciesTextView = new TextView(this);
+        speciesTextView.setText(species);
+        speciesTextView.setLayoutParams(layoutParams);
 
-            // Crear un nuevo objeto Plant con los datos recibidos
-            Plant plant = new Plant(species, plantInitialAge, username);
+        TextView initialAgeTextView = new TextView(this);
+        initialAgeTextView.setText(String.valueOf(initialAge));
+        initialAgeTextView.setLayoutParams(layoutParams);
 
-            // Agregar la nueva planta a la lista y notificar al adaptador
-            plantList.add(plant);
-            plantAdapter.notifyDataSetChanged();
-        }
+        TextView userTextView = new TextView(this);
+        userTextView.setText(user);
+        userTextView.setLayoutParams(layoutParams);
+
+        Button editButton=new Button(this);
+        editButton.setText("Editar");
+        editButton.setLayoutParams(layoutParams);
+        editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // Acción de editar
+                // Puedes abrir una nueva actividad para editar los detalles de la planta
+                // o realizar cualquier otra acción necesaria
+                Toast.makeText(GardenActivity.this, "Editar planta: " + species, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button deleteButton = new Button(this);
+        deleteButton.setText("Eliminar");
+        deleteButton.setLayoutParams(layoutParams);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción de eliminar
+                // Puedes mostrar un diálogo de confirmación antes de eliminar la planta
+                // o realizar cualquier otra acción necesaria
+                Toast.makeText(GardenActivity.this, "Eliminar planta: " + species, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        row.addView(speciesTextView);
+        row.addView(initialAgeTextView);
+        row.addView(userTextView);
+
+        tableLayout.addView(row);
     }
 
     public void logout(View view) {
@@ -144,52 +158,5 @@ public class GardenActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish(); // Cierra GardenActivity para que no se pueda volver atrás
-    }
-
-    private class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> {
-
-        private List<Plant> plantList;
-
-        public PlantAdapter(List<Plant> plantList) {
-            this.plantList = plantList;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            Plant plant = plantList.get(position);
-
-            holder.speciesTextView.setText(plant.getSpecies());
-            holder.initialAgeTextView.setText(String.valueOf(plant.getInitialAge()));
-            holder.userTextView.setText(plant.getUser());
-        }
-
-        @Override
-        public int getItemCount() {
-            return plantList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView speciesTextView;
-            public TextView initialAgeTextView;
-            public TextView userTextView;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                speciesTextView = itemView.findViewById(R.id.speciesTextView);
-                initialAgeTextView = itemView.findViewById(R.id.initialAgeTextView);
-                userTextView = itemView.findViewById(R.id.userTextView);
-            }
-        }
-        public void updateData(List<Plant> plantList) {
-            this.plantList = plantList;
-            notifyDataSetChanged();
-        }
-
     }
 }
