@@ -51,17 +51,23 @@ function Plantas() {
   };
 
   const createPlant = async () => {
+    console.log("createPlant1");
     try {
-      const username = document.getElementById("username").value;
-      const especie = document.getElementById("especie").value;
-      const edad_inicial = document.getElementById("edad_inicial").value;
-      const data = { username, especie, edad_inicial };
+      // Aquí puedes realizar la solicitud POST a la API para crear una nueva planta
+      // Puedes utilizar axios o fetch para realizar la solicitud
+      // Recuerda enviar los datos en el cuerpo de la solicitud
+      // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
+
+      var username = document.getElementById("username").value;
+      var especie = document.getElementById("especie").value;
+      var edad_inicial = document.getElementById("edad_inicial").value;
+      var data = { username, especie, edad_inicial };
 
       await axios.post("http://127.0.0.1:5000/plantas", data);
+
       fetchData();
     } catch (error) {
-      console.error("Error creating plant:", error);
-      alert("Error al crear planta");
+      console.error(error);
     }
   };
 
@@ -77,7 +83,11 @@ function Plantas() {
             <label htmlFor="edad_inicial">Edad Inicial:</label>
             <input type="text" id="edad_inicial" />
             <div>
-              <button className="btn btn-success" onClick={createPlant}>
+              <button
+                className="btn btn-success"
+                type="button"
+                onClick={createPlant}
+              >
                 Añadir Planta
               </button>
             </div>

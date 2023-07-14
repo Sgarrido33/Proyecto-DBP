@@ -1,72 +1,69 @@
 .contenedor-publicacion {
-    margin: 10px 10px 50ps;
-    display: flex;
-    background-color: #fff;
-    box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
-  }
+  margin: 10px 10px 50ps;
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
+}
 
-  .publicacion-main {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    border-right: 0.1px solid rgb(168, 166, 166);
-    padding: 20px 20px;
-  }
+.publicacion-main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-right: 0.1px solid rgb(168, 166, 166);
+  padding: 20px 20px;
+}
 
-  .publicacion-comentarios {
-    flex: 1;
-    display: flex;
-    padding: 0px 8px;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+.publicacion-comentarios {
+  flex: 1;
+  display: flex;
+  padding: 0px 8px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-  .publicacion-username {
-    font-size: 16px;
-    font-weight: bold;
-  }
+.publicacion-username {
+  font-size: 22px;
+  font-weight: bold;
+}
 
-  .publicacion-image {
-    width: 260px;
-    height: 220px;
-    background-color: red;
-    margin: 0 auto;
-  }
+.publicacion-image {
+  width: 260px;
+  height: 220px;
+  background-color: red;
+  margin: 0 auto;
+}
 
-  
-  .imagen-planta {
-    height: 100%;
-    width: auto;
-  }
-  
-  .contenedor-texto-planta {
-    text-align: center;
-    padding: 40px;
-    font-family: Lato, sans-serif;
-    font-weight: 400;
-    line-height: 1.5rem;;
-  }
-  
-  .nombre-planta {
-    font-size: 1.3rem;
-  }
-  
-  .texto-planta {
-    font-size: 1.1rem;
-    text-align: justify;
-  }
+.imagen-planta {
+  height: 100%;
+  width: auto;
+}
 
-  
-  
-  button:hover {
-    background-color: #00471b;
-  }
-  
-  .boton-clic {
-    background-color: #002ead;
-  }
-  
-  .boton-reiniciar {
-    background-color: #5a01a7;
-  }
+.contenedor-texto-planta {
+  text-align: center;
+  padding: 40px;
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.nombre-planta {
+  font-size: 1.3rem;
+}
+
+.texto-planta {
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
+button:hover {
+  background-color: #00471b;
+}
+
+.boton-clic {
+  background-color: #002ead;
+}
+
+.boton-reiniciar {
+  background-color: #5a01a7;
+}
