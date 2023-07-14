@@ -1,15 +1,17 @@
 import './App.css';
-import LoginPage from './componentes/LoginPage';
-import { useState } from 'react';
-import RegisterPage from './componentes/RegisterPage';
-import { UserProvider } from './UserContext';
-import Main from './componentes/main';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RegisLogin from './componentes/RegisLogin';
-import HomePage from './componentes/HomePage';
-
 import React from 'react';
+import LoginPage from './componentes/LoginPage';
+import { UserProvider } from './UserContext';
+import Main from './componentes/Main';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './componentes/HomePage';
 import RegistroPage from './componentes/RegistroPage';
+import { AuthRouter } from './AuthRouter';
+import { Layout } from './componentes/shared';
+import CrearPublicacion from './componentes/CrearPublicacion';
+import MisPublicaciones from './componentes/MisPublicaciones';
+
+
 
 function App() {
 
@@ -18,12 +20,18 @@ function App() {
       <UserProvider>
       <div className='general'>
         <Router>
-          <Routes>
-            <Route path="/*" element={<HomePage />} />
-            <Route path='/main' element={<Main />}/>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/registro" element={<RegistroPage />} />
-          </Routes>
+          <AuthRouter>
+            <Layout>
+              <Routes>
+                <Route path="/*" element={<HomePage />} />
+                <Route path='/main' element={<Main />}/>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/registro" element={<RegistroPage />} />
+                <Route path="/mis-publicaciones" element={<MisPublicaciones />} />
+                <Route path="/crear-publicacion" element={<CrearPublicacion />} />
+              </Routes>
+            </Layout>
+          </AuthRouter>
         </Router>
       </div>
       </UserProvider>

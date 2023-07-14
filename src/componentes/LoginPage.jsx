@@ -1,6 +1,6 @@
 import '../stylesheets/LoginPage.css';
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/LoginPage.css';
 import logo from '../imagenes/PlantPals_Logo_v1.png';
 import axios from 'axios';
@@ -11,6 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { loginUser } = useContext(UserContext);
+  const navigate = useNavigate();
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,9 +28,11 @@ function LoginPage() {
 
       if (response.data.success) {
         console.log('Inicio de sesión exitoso:', response.data);
-        const userData = {email: response.data.email };
+        const userData = {email: response.data.data.email, username: response.data.data.username };
+        console.log('userData', userData);
         loginUser(userData);
-        window.location.href = '/main';
+        navigate('/main')
+        //window.location.href = '/main';
       } else {
         console.log('Error durante el inicio de sesión:', response.data.error);
         setErrorMessage('Error. Por favor, verifica tus credenciales.');

@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
+import React from 'react';
 import '../stylesheets/Menu.css';
+import { useUser } from '../hooks/useUser';
+import { Link } from 'react-router-dom';
 
 function Menu(props) {
-    const { user, logoutUser } = useContext(UserContext);
+    const { user, logoutUser } = useUser()
+
     if (!user) {
         return null; // Otra opción es mostrar un mensaje de carga o redireccionar al inicio de sesión
     }
@@ -19,7 +21,10 @@ function Menu(props) {
                 <p className="user">{user.email}</p>
             </div>
             <div className="contenedor-menu-opciones">
-                <a href="/Publicaciones()"><p>Mis Publicaciones</p></a>
+                <Link to={"/main"}><p>Publicaciones</p></Link>
+                <Link to={"/mis-publicaciones"}><p>Mis Publicacioness</p></Link>
+                <Link to={"/crear-publicacion"}><p>Crear Publicacion</p></Link>
+             
                 <a href="/Jardin()"><p>Mis Plantas</p></a>
                 <a href="/Logros()"><p>mis Logros</p></a>
                 <p>Configuracion</p>
