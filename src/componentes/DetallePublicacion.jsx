@@ -16,7 +16,7 @@ function DetallePublicacion() {
             <div className='publicacion-main'>
                 <p className='publicacion-username'>{'publicacion.username'}</p>
                 <p>{'publicacion.descripcion'}</p>
-                <div className='publicacion-image'></div>
+                <img className='publicacion-image'  src={require(`../imagenes/planta1.jpg`)}></img>
             </div>
            <Comentarios pub_id={params.pub_id} />
         </div>
