@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../stylesheets/Plantas.css';
+import "../stylesheets/Plantas.css";
 
 function Plantas() {
   const [data, setData] = useState([]);
@@ -14,124 +14,117 @@ function Plantas() {
       const response = await axios.get("http://127.0.0.1:5000/plantas");
       setData(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching data:", error);
     }
   };
 
   const editPlant = async (id) => {
     try {
-      var username = document.getElementById("username").value;
-      var especie = document.getElementById("especie").value;
-      var edad_inicial = document.getElementById("edad_inicial").value
-      var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
+      const username = document.getElementById("username").value;
+      const especie = document.getElementById("especie").value;
+      const edad_inicial = document.getElementById("edad_inicial").value;
+      const data = { username, especie, edad_inicial };
 
-    fetch(`http://127.0.0.1:5000/planta/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    }).then(response =>response.text())
-    .then(text => {
-        if(text==="SUCCESS"){
-            fetchData();
-        }
-        else{
-            alert("Error")
-        }
-    })
+      const response = await axios.put(
+        `http://127.0.0.1:5000/planta/${id}`,
+        data
+      );
+      if (response.data === "SUCCESS") {
+        fetchData();
+      } else {
+        throw new Error("Error updating plant");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error updating plant:", error);
+      alert("Error al actualizar planta");
     }
   };
 
   const deletePlant = async (id) => {
     try {
-      const response = await axios.delete(`http://127.0.0.1:5000/plantas/${id}`);
-  
-      if (response.status === 200) {
-        fetchData(); // Fetch updated data
-      } else {
-        throw new Error("Error deleting plant");
-      }
+      await axios.delete(`http://127.0.0.1:5000/plantas/${id}`);
+      fetchData();
     } catch (error) {
       console.error("Error deleting plant:", error);
       alert("Error al eliminar planta");
     }
   };
-  
 
   const createPlant = async () => {
     try {
-      var username = document.getElementById("username").value;
-    var especie = document.getElementById("especie").value;
-    var edad_inicial = document.getElementById("edad_inicial").value;
-    var data={"username": username, "especie": especie, "edad_inicial": edad_inicial}
+      const username = document.getElementById("username").value;
+      const especie = document.getElementById("especie").value;
+      const edad_inicial = document.getElementById("edad_inicial").value;
+      const data = { username, especie, edad_inicial };
 
-    const response = await axios.post("http://127.0.0.1:5000/plantas",data);
-    if (response.status === 200) {
+      await axios.post("http://127.0.0.1:5000/plantas", data);
       fetchData();
-    } else {
-      throw new Error("Error al crear planta");
+    } catch (error) {
+      console.error("Error creating plant:", error);
+      alert("Error al crear planta");
     }
-  } catch (error) {
-    console.error("Error creating plant:",error);
-    alert("Error al crear planta")
-  }
+  };
 
-    
-}
   return (
-    <div>
-    <div className="Jardin">
-        <div className="form">
-        <label htmlFor="username">Username:</label>
-        <input type="text" id="username" />
-        <label htmlFor="especie">Especie:</label>
-        <input type="text" id="especie" />
-        <label htmlFor="edad_inicial">Edad Inicial:</label>
-        <input type="text" id="edad_inicial" />
-        <button type="button" onClick={createPlant}>
-        Añadir Planta </button>
-        </div>
-      <table id="tabla-jardin">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Especie</th>
-            <th>Edad Inicial</th>
-            <th>Fecha de registro</th>
-            <th>Cantidad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((plant) => (
-            <tr key={plant.id}>
-              <td>{plant.username}</td>
-              <td>{plant.especie}</td>
-              <td>{plant.edad_inicial}</td>
-              <td>{plant.fecha_registro}</td>
-              <td>{plant.cantidad}</td>
-              <td>
-                <button type="button" onClick={() => editPlant(plant.id)}>
-                  Editar
-                </button>
-                <button type="button" onClick={() => deletePlant(plant.id)}>
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-      
+    <div className="row">
+      <div className="col-md-4">
+        <form className="card card-body">
+          <div className="form-group">
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" />
+            <label htmlFor="especie">Especie:</label>
+            <input type="text" id="especie" />
+            <label htmlFor="edad_inicial">Edad Inicial:</label>
+            <input type="text" id="edad_inicial" />
+            <div>
+              <button className="btn btn-success" onClick={createPlant}>
+                Añadir Planta
+              </button>
+            </div>
           </div>
-
-        )
-          }
-
-
+        </form>
+      </div>
+      <div className="col-md-4">
+        <div>
+          <table id="tabla-jardin" className="table table-stripped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Especie</th>
+                <th>Edad</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((plant) => (
+                <tr key={plant.plant_id}>
+                  <td>{plant.username}</td>
+                  <td>{plant.especie}</td>
+                  <td>{plant.edad}</td>
+                  <td>{plant.cantidad}</td>
+                  <td>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => editPlant(plant.plant_id)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="btn btn-danger btn-sm btn-block"
+                      onClick={() => deletePlant(plant.plant_id)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Plantas;

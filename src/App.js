@@ -13,6 +13,8 @@ import MisPublicaciones from './componentes/MisPublicaciones';
 
 
 
+
+
 function App() {
 
   return (
@@ -38,9 +40,6 @@ function App() {
     </div>
   );
 }
-
-
-
 
 
 export default App;
