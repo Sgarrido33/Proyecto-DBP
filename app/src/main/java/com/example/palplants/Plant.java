@@ -43,7 +43,7 @@ public class Plant {
         return initialAge;
     }
 
-    public void setInitialAge(int initialAge) {
+    public void setInitialAge(double initialAge) {
         this.initialAge = initialAge;
     }
 

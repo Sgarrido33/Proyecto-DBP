@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,9 +24,9 @@ public class PlantActivity extends AppCompatActivity {
     private EditText plantTypeEditText;
     private EditText plantInitialAgeEditText;
     private Button registerPlantButton;
-
     private RequestQueue requestQueue;
 
+    private String plantId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +36,15 @@ public class PlantActivity extends AppCompatActivity {
         plantInitialAgeEditText = findViewById(R.id.plantInitialAgeEditText);
         registerPlantButton = findViewById(R.id.addPlantButton);
 
+
         // Crear el objeto RequestQueue
         requestQueue = Volley.newRequestQueue(this);
+        Intent intent = getIntent();
+
 
         registerPlantButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 registerPlant();
             }
         });

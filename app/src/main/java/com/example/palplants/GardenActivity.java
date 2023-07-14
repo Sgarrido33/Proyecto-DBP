@@ -34,7 +34,8 @@ public class GardenActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private RequestQueue requestQueue;
     private List<Plant> plantList = new ArrayList<>();
-
+    private static final int REQUEST_CODE_ADD_PLANT = 1;
+    private static final int REQUEST_CODE_EDIT_PLANT = 2;
     UserSession userSession = UserSession.getInstance();
     String username = userSession.getUsername();
     String email = userSession.getEmail();
@@ -129,10 +130,7 @@ public class GardenActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // Acción de editar
-                // Puedes abrir una nueva actividad para editar los detalles de la planta
-                // o realizar cualquier otra acción necesaria
-                Toast.makeText(GardenActivity.this, "Editar planta: " + species, Toast.LENGTH_SHORT).show();
+                openEditPlantActivity(plantId);
             }
         });
 
@@ -198,7 +196,6 @@ public class GardenActivity extends AppCompatActivity {
         }
     }
 
-    private static final int REQUEST_CODE_ADD_PLANT = 1;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -220,6 +217,45 @@ public class GardenActivity extends AppCompatActivity {
 
             // Actualizar la tabla de plantas
             addPlantToTable(species, plantInitialAge, username,quantity,plantId);
+        }
+        else if (requestCode == REQUEST_CODE_EDIT_PLANT && resultCode == RESULT_OK) {
+            String plantId = data.getStringExtra("plantId");
+            String updatedSpecies = data.getStringExtra("updatedPlantType");
+            double updatedInitialAge = data.getDoubleExtra("updatedPlantInitialAge", 0);
+
+            for (Plant plant : plantList) {
+                if (plant.getPlantId().equals(plantId)) {
+                    plant.setSpecies(updatedSpecies);
+                    plant.setInitialAge(updatedInitialAge);
+                    break;
+                }
+            }
+
+            updateTable();
+            Toast.makeText(this, "Planta actualizada exitosamente", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    public void openEditPlantActivity(String plantId) {
+        // Obtener los datos de la planta seleccionada
+
+        // Buscar la planta correspondiente en la lista plantList utilizando el plantId
+        Plant plantToEdit = null;
+        for (Plant plant : plantList) {
+            if (plant.getPlantId().equals(plantId)) {
+                plantToEdit = plant;
+                break;
+            }
+        }
+
+        if (plantToEdit != null) {
+            // Crear un intent para abrir la actividad de edición de plantas
+            Intent intent = new Intent(this, EditPlantActivity.class);
+            intent.putExtra("plantId",plantId);
+            intent.putExtra("plantType", plantToEdit.getSpecies());
+            intent.putExtra("plantInitialAge", plantToEdit.getInitialAge());
+
+            startActivityForResult(intent, REQUEST_CODE_EDIT_PLANT);
         }
     }
 
