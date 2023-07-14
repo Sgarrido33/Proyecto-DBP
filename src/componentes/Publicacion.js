@@ -1,13 +1,24 @@
 import React from 'react';
 import BotonLike from './BotonLike'
 import '../stylesheets/Publicacion.css'
-import Comentarios from './Comentarios';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../hooks/useUser';
 
 function Publicacion (props) {
     const { datos }=props;
-    const counter = <BotonLike/>;
     const navigate = useNavigate()
+    const { user } = useUser()
+
+    const darLike = async (pub_id) => {
+        try {
+          var data={  pub_id, username: user.username }
+          await axios.post('http://127.0.0.1:5000/megustas', data);
+        } catch (error) {
+            alert("error")
+            console.error(error);
+        }
+    }
 
     return(
     <div className="contenedor">
@@ -23,7 +34,7 @@ function Publicacion (props) {
                         <div className='publicacion-comentarios'>
                             <div style={{ }}>
                                 <label>Likes 5</label>
-                                <button>Dar Like</button>
+                                <button onClick={() => darLike(publicacion.pub_id)}>Dar Like</button>
                             </div> 
                             <button onClick={() => {
                                 navigate(`/detalle-publicacion/${publicacion.pub_id}`)

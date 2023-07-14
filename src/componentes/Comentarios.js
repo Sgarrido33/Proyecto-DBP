@@ -1,8 +1,10 @@
 import React, { useState,useEffect} from "react";
 import axios from "axios";
+import { useUser } from "../hooks/useUser";
 
 function Comentarios({ pub_id }) {
   const [data, setData] = useState([]);
+  const { user } = useUser()
 
   useEffect(() => {
     fetchData();
@@ -68,7 +70,7 @@ function Comentarios({ pub_id }) {
       // Recuerda enviar los datos en el cuerpo de la solicitud
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
       var contenido = document.getElementById("contenido").value;
-    var data={ contenido, pub_id }
+    var data={ contenido, pub_id, username: user.username }
 
 
     
@@ -100,7 +102,7 @@ function Comentarios({ pub_id }) {
         <tbody>
           {data.map((comentario) => (
             <tr key={comentario.comment_id}>
-              <td>{comentario.pub_id}</td>
+              <td>{comentario.username ?? 'Anonimo'}</td>
               <td>{comentario.contenido}</td>
               <td>
                 <button type="button" onClick={() => editComment(comentario.commnent_id)}>
