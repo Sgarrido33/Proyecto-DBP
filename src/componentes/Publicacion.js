@@ -18,7 +18,7 @@ function Publicacion (props) {
             </p>
             ))}
         </div>
-        <div className="contenedor-comentarios">
+        {/*<div className="contenedor-comentarios">
             {datos.map((publicacion) => (
             <p key={publicacion.pub_id}>
                 Comentarios: 
@@ -26,7 +26,7 @@ function Publicacion (props) {
                 <Comentarios/>
             </p>
             ))}
-        </div>
+            </div>*/}
         <div className="contenedor-boton">
             {counter}
         </div>

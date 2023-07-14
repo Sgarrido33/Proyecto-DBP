@@ -205,19 +205,22 @@ def get_publicaciones():
         return jsonify(publicaciones_json)
     
     if request.method == 'POST':
-        data = request.get_json()
-        descripcion = data['descripcion']
-        tipo = data['tipo']
-        asunto = data['asunto']
-        username = data['username']
+        descripcion = request.form.get('descripcion')
+        tipo = request.form.get('tipo')
+        asunto = request.form.get('asunto')
+        username = request.form.get('username')
+        
         publicacion = Publicacion(descripcion=descripcion, tipo=tipo, asunto=asunto, username=username)
         db.session.add(publicacion)
         db.session.commit()
-        return jsonify({'pub_id': publicacion.pub_id,
-                        'descripcion': publicacion.descripcion,
-                        'tipo': publicacion.tipo,
-                        'asunto': publicacion.asunto,
-                        'username': publicacion.username})
+        
+        return jsonify({
+            'pub_id': publicacion.pub_id,
+            'descripcion': publicacion.descripcion,
+            'tipo': publicacion.tipo,
+            'asunto': publicacion.asunto,
+            'username': publicacion.username
+        })
 
 @app.route('/publicaciones/<pub_id>', methods=['GET', 'PUT', 'DELETE'])
 def publicacion(pub_id):
