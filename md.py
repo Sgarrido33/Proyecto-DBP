@@ -84,8 +84,8 @@ class Comentario(db.Model):
     username = db.Column(db.String(50), db.ForeignKey('Usuario.username'))
 
 
-class meGusta(db.Model):
-    __tablename__ = 'meGusta'
+class MeGusta(db.Model):
+    __tablename__ = 'MeGusta'
     username = db.Column(db.String(64),
                         db.ForeignKey('Usuario.username'),
                         primary_key=True)
@@ -198,18 +198,21 @@ def login():
 def get_publicaciones():
     if request.method == 'GET':
         publicaciones = Publicacion.query.all()
-        publicaciones_json = [{'pub_id': publicacion.pub_id,
-                              'descripcion': publicacion.descripcion,
-                              'tipo': publicacion.tipo,
-                              'asunto': publicacion.asunto,
-                              'username': publicacion.username,
-                              #'imagen': 'static/imagenes/' + publicacion.imagen if publicacion.imagen else 'none'
-                              'imagen': '/static/imagenes/' + publicacion.imagen if publicacion.imagen else None
-                              } for publicacion in publicaciones]
-        
-        
-        return jsonify(publicaciones_json[::-1])
-    
+        pubs_with_likes = []
+        for pub in publicaciones:
+            num_likes = MeGusta.query.filter_by(pub_id=pub.pub_id).count()
+            pub_info = {
+                'num_likes': num_likes,
+                'pub_id': pub.pub_id,
+                'descripcion': pub.descripcion,
+                'tipo': pub.tipo,
+                'asunto': pub.asunto,
+                'username': pub.username,
+                'imagen': '/static/imagenes/' + pub.imagen if pub.imagen else None
+            }
+            pubs_with_likes.append(pub_info)
+
+        return jsonify(pubs_with_likes[::-1])
     if request.method == 'POST':
         descripcion = request.form.get('descripcion')
         tipo = request.form.get('tipo')
@@ -493,7 +496,7 @@ def comentario(comment_id):
 @app.route('/megustas', methods=['GET', 'POST'])
 def get_megustas():
     if request.method == 'GET':
-        megustas = meGusta.query.all()
+        megustas = MeGusta.query.all()
         megustas_list = []
         for megusta in megustas:
             megustas_list.append({
@@ -505,7 +508,7 @@ def get_megustas():
         data = request.get_json()
         username = data['username']
         pub_id = data['pub_id']
-        megusta = meGusta(username=username, pub_id=pub_id)
+        megusta = MeGusta(username=username, pub_id=pub_id)
         db.session.add(megusta)
         db.session.commit()
         return jsonify({
@@ -515,7 +518,7 @@ def get_megustas():
 
 @app.route('/megustas/<username>/<pub_id>', methods=['GET', 'PUT', 'DELETE'])
 def megusta(username, pub_id):
-    megusta = meGusta.query.filter_by(username=username, pub_id=pub_id).first()
+    megusta = MeGusta.query.filter_by(username=username, pub_id=pub_id).first()
 
     if not megusta:
         return jsonify({'message': 'Me gusta no encontrado'})
