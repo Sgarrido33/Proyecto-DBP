@@ -4,6 +4,7 @@ import '../stylesheets/HomePage.css';
 import logo from '../imagenes/PlantPals_Logo_v1.png';
 import background from '../imagenes/BG.jpg';
 
+
 function HomePage() {
   return (
     <div className="home-page" style={{ backgroundImage: `url(${background})` }}>

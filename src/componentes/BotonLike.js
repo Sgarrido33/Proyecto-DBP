@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function BotonLike(props) {
-    const data={props};
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(false);
 

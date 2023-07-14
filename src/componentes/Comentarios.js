@@ -1,8 +1,10 @@
 import React, { useState,useEffect} from "react";
 import axios from "axios";
+import { useUser } from "../hooks/useUser";
 
-function Comentarios() {
+function Comentarios({ pub_id }) {
   const [data, setData] = useState([]);
+  const { user } = useUser()
 
   useEffect(() => {
     fetchData();
@@ -11,7 +13,10 @@ function Comentarios() {
   const fetchData = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:5000/comentarios");
-      setData(response.data);
+      console.log("response", response?.data)
+      const data = (response?.data ?? []).filter(comment => comment.pub_id == pub_id)
+      console.log("data", data)
+      setData(data);
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +70,9 @@ function Comentarios() {
       // Recuerda enviar los datos en el cuerpo de la solicitud
       // Luego, puedes llamar a fetchData() para actualizar los datos después de la creación
       var contenido = document.getElementById("contenido").value;
-    var data={ contenido }
+    var data={ contenido, pub_id, username: user.username }
+
+
     
     await axios.post('http://127.0.0.1:5000/comentarios', data);
 
@@ -95,7 +102,7 @@ function Comentarios() {
         <tbody>
           {data.map((comentario) => (
             <tr key={comentario.comment_id}>
-              <td>{comentario.pub_id}</td>
+              <td>{comentario.username ?? 'Anonimo'}</td>
               <td>{comentario.contenido}</td>
               <td>
                 <button type="button" onClick={() => editComment(comentario.commnent_id)}>

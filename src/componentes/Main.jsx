@@ -1,43 +1,13 @@
-import React,{ useState,setState, useContext } from 'react';
-import { UserContext } from '../UserContext';
-import Plantas from './Plantas';
-import Publicaciones from './Publicaciones';
-import BarraSuperior from './BarraSuperior';
+import React from 'react';
+import withAuth from '../hocs/withAuth';
 import '../stylesheets/main.css'
-import Menu from './Menu';
-import Logro from './Logro';
-import { Link } from 'react-router-dom';
+import ListaPublicaciones from './ListaPublicaciones';
 
 function Main() {
-    const [showJardin, setShowJardin] = useState(false);
-    const [showLogros, setShowLogros] = useState(false);
-    const [showPublicaciones,setShowPublicaciones]=useState(false);
-
     return(
-      <div>
-        <div className='izquierda'>
-          <div className='barra-superior'>
-            <BarraSuperior/>
-            <button className='btn btn-primary btn-sm' onClick={() => setShowJardin(!showJardin)}>
-              Mostrar/Ocultar Jardin
-            </button>
-            <button className='btn btn-primary btn-sm' onClick={() => setShowPublicaciones(!showPublicaciones)}>
-              Mostrar/Ocultar Publicaciones
-            </button>
-          </div>
-          <div className='Contenido'>
-            <div className='Jardin'>{showJardin && <Plantas />}</div>
-            <div className='Publicaciones'>{showPublicaciones &&<Publicaciones/>}</div>
-          </div>
-        </div>
-        <div className='Menu'>
-          <Menu
-          foto='incognito'
-          />
-        </div>
-      </div>  
+        <ListaPublicaciones title="Publicaciones" />
     )
 }
 
 
-export default Main
+export default withAuth(Main)

@@ -1,13 +1,39 @@
 .contenedor-publicacion {
-    width: 1170px;
-    height: 368px;
     margin: 10px 10px 50ps;
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #fff;
     box-shadow: 0 3px 13px 1px rgb(0 0 0 / 9%);
   }
+
+  .publicacion-main {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-right: 0.1px solid rgb(168, 166, 166);
+    padding: 20px 20px;
+  }
+
+  .publicacion-comentarios {
+    flex: 1;
+    display: flex;
+    padding: 0px 8px;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .publicacion-username {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .publicacion-image {
+    width: 260px;
+    height: 220px;
+    background-color: red;
+    margin: 0 auto;
+  }
+
   
   .imagen-planta {
     height: 100%;
