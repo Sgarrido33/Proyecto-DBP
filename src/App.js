@@ -10,6 +10,7 @@ import { AuthRouter } from './AuthRouter';
 import { Layout } from './componentes/shared';
 import CrearPublicacion from './componentes/CrearPublicacion';
 import MisPublicaciones from './componentes/MisPublicaciones';
+import DetallePublicacion from './componentes/DetallePublicacion';
 
 
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/registro" element={<RegistroPage />} />
                 <Route path="/mis-publicaciones" element={<MisPublicaciones />} />
                 <Route path="/crear-publicacion" element={<CrearPublicacion />} />
+                <Route path="/detalle-publicacion/:pub_id" element={<DetallePublicacion />} />
               </Routes>
             </Layout>
           </AuthRouter>

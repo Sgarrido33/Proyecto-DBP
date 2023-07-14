@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useUser } from "./hooks/useUser"
 
-const authorizedLocations = [/mis-publicaciones/, /crear-publicacion/]
+const authorizedLocations = [/mis-publicaciones/, /crear-publicacion/, /detalle-publicacion/]
 
 export const AuthRouter = ({children}) => {
     const { user } = useUser()

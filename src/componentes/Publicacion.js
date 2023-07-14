@@ -2,22 +2,36 @@ import React from 'react';
 import BotonLike from './BotonLike'
 import '../stylesheets/Publicacion.css'
 import Comentarios from './Comentarios';
+import { useNavigate } from 'react-router-dom';
 
 function Publicacion (props) {
     const { datos }=props;
     const counter = <BotonLike/>;
+    const navigate = useNavigate()
 
     return(
-    <div className="contenedor-publicacion">
+    <div className="contenedor">
         
-        <div className="contenedor-texto-planta">
             {datos.map((publicacion) => (
-            <p key={publicacion.pub_id}>
-                {publicacion.username}
-                {publicacion.descripcion}
-            </p>
+                <div   key={publicacion.pub_id} className='contenedor-publicacion'>
+                    <div style={{ flex: 1, display: 'flex' }}>
+                        <div className='publicacion-main'>
+                            <p className='publicacion-username'>{publicacion.username}</p>
+                            <p>{publicacion.descripcion}</p>
+                            <div className='publicacion-image'></div>
+                        </div>
+                        <div className='publicacion-comentarios'>
+                            <div style={{ }}>
+                                <label>Likes 5</label>
+                                <button>Dar Like</button>
+                            </div> 
+                            <button onClick={() => {
+                                navigate(`/detalle-publicacion/${publicacion.pub_id}`)
+                            }}>Ver comentarios</button>
+                        </div>
+                    </div>
+                </div>
             ))}
-        </div>
         {/*<div className="contenedor-comentarios">
             {datos.map((publicacion) => (
             <p key={publicacion.pub_id}>
@@ -27,9 +41,6 @@ function Publicacion (props) {
             </p>
             ))}
             </div>*/}
-        <div className="contenedor-boton">
-            {counter}
-        </div>
     </div>
     
     )
