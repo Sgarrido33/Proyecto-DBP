@@ -159,6 +159,7 @@ public class GardenActivity extends AppCompatActivity {
         row.addView(deleteButton);
 
         tableLayout.addView(row);
+        updateTable();
     }
     // Función para eliminar una planta del registro
     private void deletePlantFromDatabase(String plantId) {
@@ -196,6 +197,7 @@ public class GardenActivity extends AppCompatActivity {
                 break;
             }
         }
+        updateTable();
     }
 
     private static final int REQUEST_CODE_ADD_PLANT = 1;
