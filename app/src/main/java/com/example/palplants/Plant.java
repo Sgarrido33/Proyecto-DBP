@@ -4,10 +4,10 @@ public class Plant {
     private String plantId;
     private String species;
     private String username;
-    private int initialAge;
+    private double initialAge;
     private int quantity;
 
-    public Plant(String plantId, String species, String username, int initialAge, int quantity) {
+    public Plant(String plantId, String species, String username, double initialAge, int quantity) {
         this.plantId = plantId;
         this.species = species;
         this.username = username;
@@ -39,7 +39,7 @@ public class Plant {
         this.username = username;
     }
 
-    public int getInitialAge() {
+    public double getInitialAge() {
         return initialAge;
     }
 
