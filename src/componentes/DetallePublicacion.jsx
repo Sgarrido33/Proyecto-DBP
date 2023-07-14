@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import withAuth from "../hocs/withAuth";
 import Comentarios from "./Comentarios";
@@ -6,8 +6,20 @@ import Comentarios from "./Comentarios";
 function DetallePublicacion() {
   const params = useParams();
   const location = useLocation();
-  const publicacion = location.state;
-  console.log(publicacion);
+  const [publicacion, setPublicacion] = useState(location.state);
+
+  useEffect(() => {
+    const persistedPublicacion = localStorage.getItem("publicacion");
+    if (persistedPublicacion) {
+      setPublicacion(JSON.parse(persistedPublicacion));
+    } else {
+      setPublicacion(location.state);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    localStorage.setItem("publicacion", JSON.stringify(publicacion));
+  }, [publicacion]);
   useEffect(() => {
     console.log({ params });
   }, []);
@@ -18,9 +30,10 @@ function DetallePublicacion() {
         <div className="publicacion-main">
           <p className="publicacion-username">{publicacion.username}</p>
           <p>{publicacion.descripcion}</p>
+
           <img
             className="publicacion-image"
-            src={require(`../imagenes/planta1.jpg`)}
+            src={"http://127.0.0.1:5000/" + publicacion?.imagen}
           ></img>
         </div>
         <Comentarios pub_id={params.pub_id} />
